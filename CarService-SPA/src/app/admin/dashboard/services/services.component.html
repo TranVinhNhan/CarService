@@ -1,0 +1,31 @@
+<div class="page-container">
+  <div class="main-content">
+    <div class="section__content section__content--p30">
+      <div class="container-fluid">
+        <div class="col-lg-12">
+          <h3 class="title-5 m-b-35">Services</h3>
+          <div class="table-responsive table--no-card m-b-30">
+            <table class="table table-borderless table-striped table-earning">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>name</th>
+                  <th>description</th>
+                  <th class="text-right">price</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let service of services">
+                  <td>{{service.id}}</td>
+                  <td>{{service.name}}</td>
+                  <td>{{service.description}}</td>
+                  <td class="text-right">{{service.price}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

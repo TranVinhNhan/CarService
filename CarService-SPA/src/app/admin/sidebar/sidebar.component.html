@@ -1,0 +1,59 @@
+<!-- MENU SIDEBAR-->
+<aside class="menu-sidebar d-none d-lg-block">
+    <div class="logo">
+        <a [routerLink]="['/admin']">
+            <img src="../../../assets/admin/images/icon/logo.png" alt="Cool Admin" />
+        </a>
+    </div>
+    <div class="menu-sidebar__content js-scrollbar1">
+        <nav class="navbar-sidebar">
+            <ul class="list-unstyled navbar__list">
+                <li routerLinkActive="active">
+                    <a [routerLink]="['/admin']">
+                        <i class="fas fa-tachometer-alt"></i>Dashboard
+                    </a>
+                </li>
+                <li routerLinkActive="active">
+                    <a [routerLink]="['/admin/users']">
+                        <i class="fas fa-users"></i>Users</a>
+                </li>
+                <li routerLinkActive="active">
+                    <a [routerLink]="['/admin/autoparts']">
+                        <i class="fas fa-gears"></i>Automotive Parts</a>
+                </li>
+                <li routerLinkActive="active">
+                    <a [routerLink]="['/admin/services']">
+                        <i class="fas fa-gear"></i>Services</a>
+                </li>
+                <li>
+                    <a href="calendar.html">
+                        <i class="fas fa-shopping-cart"></i>Orders</a>
+                </li>
+                <li>
+                    <a href="map.html">
+                        <i class="fas fa-map-marker-alt"></i>Maps</a>
+                </li>
+                <li class="has-sub">
+                    <a class="js-arrow" href="#">
+                        <i class="fas fa-copy"></i>Pages</a>
+                    <ul class="list-unstyled navbar__sub-list js-sub-list">
+                        <li>
+                            <a href="login.html">Login</a>
+                        </li>
+                        <li>
+                            <a href="register.html">Register</a>
+                        </li>
+                        <li>
+                            <a href="forget-pass.html">Forget Password</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a [routerLink]="['/']">
+                        <i class="fas fa-desktop"></i>Homepage</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</aside>
+<!-- END MENU SIDEBAR-->

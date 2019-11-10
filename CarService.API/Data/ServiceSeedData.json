@@ -1,0 +1,32 @@
+[
+    {
+        "Name": "Car Wash",
+        "Description": "Test",
+        "Price": 10.99,
+        "CarReceiptServices": []
+    },
+    {
+        "Name": "Test1",
+        "Description": "Test1",
+        "Price": 10.99,
+        "CarReceiptServices": []
+    },
+    {
+        "Name": "Test2",
+        "Description": "Test2",
+        "Price": 10.99,
+        "CarReceiptServices": []
+    },
+    {
+        "Name": "Test3",
+        "Description": "Test3",
+        "Price": 10.99,
+        "CarReceiptServices": []
+    },
+    {
+        "Name": "Test4",
+        "Description": "Test4",
+        "Price": 10.99,
+        "CarReceiptServices": []
+    }
+]

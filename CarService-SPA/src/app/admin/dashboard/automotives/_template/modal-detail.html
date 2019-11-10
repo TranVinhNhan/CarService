@@ -1,0 +1,59 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">{{title}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<form #partDetail="ngForm" id="partDetail" (ngSubmit)="saveChanges(part.id)">
+    <div class="modal-body">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Product Name</label>
+                <input type="text" class="form-control" placeholder="Product Name" [(ngModel)]="part.name"
+                    name="partName">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputPassword4">Current Price</label>
+                <input type="number" class="form-control" placeholder="0.00" [(ngModel)]="part.currentPrice"
+                    name="partPrice">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label for="textarea-input" class="form-control-label">Description</label>
+                <textarea required [(ngModel)]="part.description" name="description" id="partDescription" rows="9"
+                    placeholder="Content..." class="form-control"></textarea>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <div class="col col-md-3">
+                    <label for="select" class=" form-control-label">Type</label>
+                </div>
+                <div class="col-12 col-md-9">
+                    <select [(ngModel)]="part.automotivePartType.id" name="select" id="select-type"
+                        class="form-control">
+                        <option [ngValue]="" disabled selected hidden>Choose product type</option>
+                        <option *ngFor="let type of types" [ngValue]="type.id">{{type.typeName}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <div class="col col-md-3">
+                    <label for="select" class=" form-control-label">Supplier</label>
+                </div>
+                <div class="col-12 col-md-9">
+                    <select [(ngModel)]="part.supplier.id" name="select" id="select-supplier" class="form-control">
+                        <option [selected]="true" disabled selected hidden>Choose supplier</option>
+                        <option *ngFor="let supplier of suppliers" [ngValue]="supplier.id">{{supplier.name}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="modal-footer">
+    <button type="submit" class="btn btn-success" form="partDetail">Save changes</button>
+    <button type="button" class="btn btn-primary" (click)="modalRef.hide()">Cancel</button>
+</div>

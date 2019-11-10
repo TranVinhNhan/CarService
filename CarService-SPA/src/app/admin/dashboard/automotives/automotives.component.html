@@ -1,0 +1,170 @@
+<div class="page-container">
+  <div class="main-content">
+    <div class="section__content section__content--p30">
+      <div class="container-fluid">
+        <div class="row m-b-25">
+          <div class="col-md-12">
+            <!-- DATA TABLE -->
+            <h3 class="title-5 m-b-35">data table</h3>
+            <div class="table-data__tool">
+              <div class="table-data__tool-left">
+                <div class="rs-select2--light rs-select2--md">
+                  <select class="js-select2" name="property">
+                    <option selected="selected">All Properties</option>
+                    <option value="">Option 1</option>
+                    <option value="">Option 2</option>
+                  </select>
+                  <div class="dropDownSelect2"></div>
+                </div>
+                <div class="rs-select2--light rs-select2--sm">
+                  <select class="js-select2" name="time">
+                    <option selected="selected">Today</option>
+                    <option value="">3 Days</option>
+                    <option value="">1 Week</option>
+                  </select>
+                  <div class="dropDownSelect2"></div>
+                </div>
+                <button class="au-btn-filter">
+                  <i class="zmdi zmdi-filter-list"></i>filters</button>
+              </div>
+              <div class="table-data__tool-right">
+                <button class="au-btn au-btn-icon au-btn--green au-btn--small" type="button"
+                  (click)="isCollapsed = !isCollapsed" [attr.aria-expended]="!isCollapsed"
+                  aria-controls="collapseBasic">
+                  <i class="zmdi zmdi-plus"></i>add item</button>
+                <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
+                  <select class="js-select2" name="type">
+                    <option selected="selected">Export</option>
+                    <option value="">Option 1</option>
+                    <option value="">Option 2</option>
+                  </select>
+                  <div class="dropDownSelect2"></div>
+                </div>
+              </div>
+            </div>
+            <div class="table-responsive table-responsive-data2">
+
+              <div id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true">
+                <div class="well well-lg card card-block card-header">
+                  <app-automotive-editor></app-automotive-editor>
+                </div>
+              </div>
+
+              <table class="table table-data2">
+                <thead>
+                  <tr>
+                    <th>
+                      <label class="au-checkbox">
+                        <input type="checkbox">
+                        <span class="au-checkmark"></span>
+                      </label>
+                    </th>
+                    <th>product name</th>
+                    <th>description</th>
+                    <th>price</th>
+                    <th>status</th>
+                    <th>type</th>
+                    <th>supplier</th>
+                    <th>photos</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let part of parts" class="tr-shadow">
+                    <td>
+                      <label class="au-checkbox">
+                        <input type="checkbox">
+                        <span class="au-checkmark"></span>
+                      </label>
+                    </td>
+                    <td>{{part.name}}</td>
+                    <td>
+                      <span class="block-email">{{part.description}}</span>
+                    </td>
+                    <td class="desc">{{part.currentPrice}}</td>
+                    <td>
+                      <span class="status--process">Available</span>
+                    </td>
+                    <td>{{part.automotivePartType.typeName}}</td>
+                    <td>{{part.supplier.name}}</td>
+                    <td>
+                      <div class="row">
+                        <div class="col-md-3" *ngFor="let photo of part.photos">
+                          <img src="{{photo.url}}" class="img-thumbnail p-1" style="width: 50px;" alt="">
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="table-data-feature">
+                        <button class="item" data-toggle="tooltip" data-placement="top" title="Image"
+                          (click)="openModalWithImageComponent(part)">
+                          <i class="zmdi zmdi-collection-image"></i>
+                        </button>
+                        <button class="item" data-toggle="tooltip" data-placement="top" title="Edit"
+                          (click)="openModalWithDetailComponent(part)">
+                          <i class="zmdi zmdi-edit"></i>
+                        </button>
+                        <button class="item" data-toggle="tooltip" data-placement="top" title="Delete"
+                          (click)="openModalWithDeleteComponent(part)">
+                          <i class="zmdi zmdi-delete"></i>
+                        </button>
+                        <button class="item" data-toggle="tooltip" data-placement="top" title="More">
+                          <i class="zmdi zmdi-more"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- END DATA TABLE -->
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-8 pr-1">
+            <h2 class="title-1 m-b-25">Product Types</h2>
+            <div class="table-responsive table--no-card m-b-30">
+              <table class="table table-borderless table-striped table-earning">
+                <thead>
+                  <tr>
+                    <th>type name</th>
+                    <th>car model</th>
+                    <th>brand</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let type of types">
+                    <td>{{type.typeName}}</td>
+                    <td>{{type.carModel}}</td>
+                    <td>{{type.brand}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="col-lg-4 pl-1">
+            <h2 class="title-1 m-b-25">Suppliers</h2>
+            <div class="table-responsive table--no-card m-b-30">
+              <table class="table table-borderless table-striped table-earning">
+                <thead>
+                  <tr>
+                    <th>name</th>
+                    <th>address</th>
+                    <th>contact</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let supplier of suppliers">
+                    <td>{{supplier.name}}</td>
+                    <td>{{supplier.address}}</td>
+                    <td>{{supplier.contact}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

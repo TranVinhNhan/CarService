@@ -1,0 +1,91 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <strong>ADD ITEM</strong> Automotive Part
+            </div>
+            <div class="card-body card-block">
+                <form id="autoEdit" #autoEdit="ngForm" (ngSubmit)="addItem()" action="" method="post"
+                    enctype="multipart/form-data" class="form-horizontal">
+                    <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="text-input" class="form-control-label">Product Name</label>
+                        </div>
+                        <div class="col-12 col-md-9">
+                            <input type="text" id="text-input" required [(ngModel)]="model.name" name="productName"
+                                placeholder="Product Name..." class="form-control">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="textarea-input" class="form-control-label">Description</label>
+                        </div>
+                        <div class="col-12 col-md-9">
+                            <textarea required [(ngModel)]="model.description" name="description" id="textarea-input"
+                                rows="9" placeholder="Content..." class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="text-input" class=" form-control-label">Price</label>
+                        </div>
+                        <div class="col-12 col-md-9">
+                            <input type="number" required [(ngModel)]="model.currentPrice" id="price" name="text-input"
+                                placeholder="0.00" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="select" class=" form-control-label">Type</label>
+                        </div>
+                        <div class="col-12 col-md-9">
+                            <select [(ngModel)]="model.automotivePartTypeId" name="select" id="select-type"
+                                class="form-control">
+                                <option [ngValue]="" disabled selected hidden>Choose product type</option>
+                                <option *ngFor="let type of types" [ngValue]="type.id">{{type.typeName}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="select" class=" form-control-label">Supplier</label>
+                        </div>
+                        <div class="col-12 col-md-9">
+                            <select [(ngModel)]="model.supplierId" name="select" id="select-supplier"
+                                class="form-control">
+                                <option [selected]="true" disabled selected hidden>Choose supplier</option>
+                                <option *ngFor="let supplier of suppliers" [ngValue]="supplier.id">{{supplier.name}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="file-input" class=" form-control-label">File input</label>
+                        </div>
+                        <div class="col-12 col-md-9">
+                            <input type="file" id="file-input" name="file-input" class="form-control-file">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col col-md-3">
+                            <label for="file-multiple-input" class=" form-control-label">Multiple File input</label>
+                        </div>
+                        <div class="col-12 col-md-9">
+                            <input type="file" id="file-multiple-input" name="file-multiple-input" multiple=""
+                                class="form-control-file">
+                        </div>
+                    </div> -->
+                </form>
+            </div>
+            <div class="card-footer">
+                <button form="autoEdit" type="submit" class="btn btn-primary btn-sm">
+                    <i class="fa fa-dot-circle-o"></i> Submit
+                </button>
+                <button form="autoEdit" type="reset" class="btn btn-danger btn-sm">
+                    <i class="fa fa-ban"></i> Reset
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
