@@ -237,6 +237,14 @@ export class ModalPartDetailComponent implements OnInit {
       this.modalRef.hide();
     }, error => {
       this.alertify.error(error);
+    }, () => {
+      this.autopartService.getPart(this.part.id).subscribe((part: AutoPart) => {
+        const index = this.parts.indexOf(this.part);
+        this.parts[index] = part;
+        console.log(part);
+      }, error => {
+        this.alertify.error(error);
+      });
     });
   }
 }
