@@ -9,61 +9,61 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputEmail4">Email</label>
-                <input type="email" class="form-control" placeholder="Email" [(ngModel)]="user.email" name="userEmail">
+                <input type="email" class="form-control" placeholder="Email" [(ngModel)]="userForEdit.email" name="userEmail">
             </div>
             <div class="form-group col-md-6">
                 <label for="inputPassword4">Username</label>
-                <input type="text" class="form-control" placeholder="Username" [(ngModel)]="user.username"
+                <input disabled type="text" class="form-control" placeholder="Username" [(ngModel)]="userForEdit.username"
                     name="username">
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputEmail4">First Name</label>
-                <input type="text" class="form-control" placeholder="First Name" [(ngModel)]="user.firstName"
+                <input type="text" class="form-control" placeholder="First Name" [(ngModel)]="userForEdit.firstName"
                     name="userFirstName">
             </div>
             <div class="form-group col-md-6">
                 <label for="inputPassword4">Last Name</label>
-                <input type="text" class="form-control" placeholder="Last Name" [(ngModel)]="user.lastName"
+                <input type="text" class="form-control" placeholder="Last Name" [(ngModel)]="userForEdit.lastName"
                     name="userLastName">
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputEmail4">Gender</label>
-                <input type="text" class="form-control" placeholder="Gender" [(ngModel)]="user.gender"
+                <input type="text" class="form-control" placeholder="Gender" [(ngModel)]="userForEdit.gender"
                     name="userGender">
             </div>
             <div class="form-group col-md-6">
                 <label for="inputPassword4">Role</label>
-                <input type="text" class="form-control" placeholder="Role" [(ngModel)]="user.role" name="userRole">
+                <input disabled type="text" class="form-control" placeholder="Role" [(ngModel)]="userForEdit.role" name="userRole">
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputEmail4">Day Created</label>
-                <input type="datetime" class="form-control" [(ngModel)]="user.created" name="userCreated">
+                <input disabled type="datetime" class="form-control" [(ngModel)]="userForEdit.created" name="userCreated">
             </div>
             <div class="form-group col-md-6">
                 <label for="inputPassword4">Last Active</label>
-                <input type="datetime" class="form-control" [(ngModel)]="user.lastActive" name="userLastActive">
+                <input disabled type="datetime" class="form-control" [(ngModel)]="userForEdit.lastActive" name="userLastActive">
             </div>
         </div>
         <div class="form-group">
             <label for="inputAddress">Address</label>
-            <input type="text" class="form-control" placeholder="1234 Main St" [(ngModel)]="user.address"
+            <input type="text" class="form-control" placeholder="1234 Main St" [(ngModel)]="userForEdit.address"
                 name="userAddress">
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputEmail4">Phone Number</label>
-                <input type="text" class="form-control" placeholder="Phone number" [(ngModel)]="user.phoneNumber"
+                <input type="text" class="form-control" placeholder="Phone number" [(ngModel)]="userForEdit.phoneNumber"
                     name="userPhoneNumber">
             </div>
             <div class="form-group col-md-6">
                 <label for="inputPassword4">Payment Card</label>
-                <input type="text" class="form-control" placeholder="Payment Card" [(ngModel)]="user.paymentCardNumber"
+                <input type="text" class="form-control" placeholder="Payment Card" [(ngModel)]="userForEdit.paymentCardNumber"
                     name="userPaymentCard">
             </div>
         </div>

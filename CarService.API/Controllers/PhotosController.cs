@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using CarService.API.Dtos;
@@ -84,6 +85,31 @@ namespace CarService.API.Controllers
             }
 
             return BadRequest("Could not add the photo");
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeletePhoto(int automotivePartId, int id)
+        {
+            var partFromRepo = await _repo.GetPart(automotivePartId);
+
+            if (!partFromRepo.Photos.Any(p => p.Id == id))
+                return BadRequest("Photo does not exist");
+
+            var photoFromRepo = await _repo.GetPhoto(id);
+
+            var deleteParams = new DeletionParams(photoFromRepo.PublicId);
+
+            var result = _cloudinary.Destroy(deleteParams);
+
+            if (result.Result == "ok")
+            {
+                _repo.Delete(photoFromRepo);
+            }
+
+            if (await _repo.SaveAll())
+                return Ok();
+
+            return BadRequest("Failed to delete photo");
         }
     }
 }

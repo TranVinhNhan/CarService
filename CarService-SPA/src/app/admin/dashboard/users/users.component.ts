@@ -65,7 +65,8 @@ export class UsersComponent implements OnInit {
   openModalWithDetailComponent(user: User) {
     const initialState = {
       title: 'User Detail',
-      user
+      user,
+      users: this.users
     };
     this.modalRef = this.modalService.show(ModalUserDetailComponent, { initialState });
   }
@@ -116,6 +117,8 @@ export class ModalUserDeleteComponent implements OnInit {
 export class ModalUserDetailComponent implements OnInit {
   title: string;
   user: User;
+  userForEdit: User;
+  users: User[];
 
   constructor(
     public modalRef: BsModalRef,
@@ -123,7 +126,9 @@ export class ModalUserDetailComponent implements OnInit {
     private alertify: AlertifyService
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.userForEdit = Object.assign({}, this.user);
+  }
 
   deleteUser(id: number) {
     this.userService.deleteUser(id).subscribe(next => {
@@ -134,10 +139,17 @@ export class ModalUserDetailComponent implements OnInit {
     });
   }
 
-  saveChanges(id: number) {
-    this.alertify.success('success');
-    console.log(id);
-    this.modalRef.hide();
+  saveChanges() {
+    this.userService.updateUser(this.user.id, this.userForEdit).subscribe(next => {
+      this.alertify.success('Updated successfully');
+      this.modalRef.hide();
+      const index = this.users.indexOf(this.user, 0);
+      if (index > -1) {
+        this.users[index] = this.userForEdit;
+      }
+    }, error => {
+      this.alertify.error(error);
+    });
   }
 }
 //#endregion

@@ -9,19 +9,19 @@
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label>Product Name</label>
-                <input type="text" class="form-control" placeholder="Product Name" [(ngModel)]="part.name"
+                <input type="text" class="form-control" placeholder="Product Name" [(ngModel)]="displayPart.name"
                     name="partName">
             </div>
             <div class="form-group col-md-6">
                 <label for="inputPassword4">Current Price</label>
-                <input type="number" class="form-control" placeholder="0.00" [(ngModel)]="part.currentPrice"
+                <input type="number" class="form-control" placeholder="0.00" [(ngModel)]="displayPart.currentPrice"
                     name="partPrice">
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-12">
                 <label for="textarea-input" class="form-control-label">Description</label>
-                <textarea required [(ngModel)]="part.description" name="description" id="partDescription" rows="9"
+                <textarea required [(ngModel)]="displayPart.description" name="description" id="partDescription" rows="9"
                     placeholder="Content..." class="form-control"></textarea>
             </div>
         </div>
@@ -31,7 +31,7 @@
                     <label for="select" class=" form-control-label">Type</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <select [(ngModel)]="part.automotivePartType.id" name="select" id="select-type"
+                    <select [(ngModel)]="displayPart.automotivePartType.id" name="select" id="select-type"
                         class="form-control">
                         <option [ngValue]="" disabled selected hidden>Choose product type</option>
                         <option *ngFor="let type of types" [ngValue]="type.id">{{type.typeName}}</option>
@@ -43,7 +43,7 @@
                     <label for="select" class=" form-control-label">Supplier</label>
                 </div>
                 <div class="col-12 col-md-9">
-                    <select [(ngModel)]="part.supplier.id" name="select" id="select-supplier" class="form-control">
+                    <select [(ngModel)]="displayPart.supplier.id" name="select" id="select-supplier" class="form-control">
                         <option [selected]="true" disabled selected hidden>Choose supplier</option>
                         <option *ngFor="let supplier of suppliers" [ngValue]="supplier.id">{{supplier.name}}
                         </option>

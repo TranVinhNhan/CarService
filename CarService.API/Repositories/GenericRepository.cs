@@ -24,6 +24,11 @@ namespace CarService.API.Repositories
             _context.Remove(entity);
         }
 
+        public void Update<T>(T entity) where T : class
+        {
+            _context.Update(entity);
+        }
+
         public async Task<User> GetUser(int id)
         {
             var user = await _context.Users.Include(c => c.CarReceipts).FirstOrDefaultAsync(u => u.Id == id);

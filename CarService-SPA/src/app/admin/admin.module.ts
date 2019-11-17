@@ -16,7 +16,8 @@ import {
   AutomotivesComponent,
   ModalPartDeleteComponent,
   ModalPartImageComponent,
-  ModalPartDetailComponent
+  ModalPartDetailComponent,
+  ModalPhotoDetailComponent
 } from './dashboard/automotives/automotives.component';
 import { AutotypeService } from '../_services/autotype.service';
 import { SupplierService } from '../_services/supplier.service';
@@ -51,7 +52,8 @@ import { AutomotiveEditorComponent } from './dashboard/automotives/automotive-ed
     ModalPartDeleteComponent,
     AutomotiveEditorComponent,
     ModalPartImageComponent,
-    ModalPartDetailComponent
+    ModalPartDetailComponent,
+    ModalPhotoDetailComponent
   ],
   providers: [
     UserService,
@@ -65,7 +67,8 @@ import { AutomotiveEditorComponent } from './dashboard/automotives/automotive-ed
     ModalUserDetailComponent,
     ModalPartDeleteComponent,
     ModalPartImageComponent,
-    ModalPartDetailComponent
+    ModalPartDetailComponent,
+    ModalPhotoDetailComponent
   ]
 })
 export class AdminModule { }

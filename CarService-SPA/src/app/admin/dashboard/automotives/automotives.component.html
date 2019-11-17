@@ -89,8 +89,8 @@
                     <td>{{part.supplier.name}}</td>
                     <td>
                       <div class="row">
-                        <div class="col-md-3" *ngFor="let photo of part.photos">
-                          <img src="{{photo.url}}" class="img-thumbnail p-1" style="width: 50px;" alt="">
+                        <div style="cursor: pointer;" class="col-md-3" *ngFor="let photo of part.photos">
+                          <img (click)="openModalWithDeletePhotoComponent(part, photo)" src="{{photo.url}}" class="img-thumbnail p-1" style="width: 50px;" alt="">
                         </div>
                       </div>
                     </td>

@@ -5,7 +5,6 @@ import { AdminComponent } from './admin.component';
 import { UsersComponent } from './dashboard/users/users.component';
 import { AutomotivesComponent } from './dashboard/automotives/automotives.component';
 import { ServicesComponent } from './dashboard/services/services.component';
-import { AutomotiveEditorComponent } from './dashboard/automotives/automotive-editor/automotive-editor.component';
 
 
 const routes: Routes = [
@@ -16,7 +15,6 @@ const routes: Routes = [
             {path: '', component: DashboardComponent},
             {path: 'users', component: UsersComponent},
             {path: 'autoparts', component: AutomotivesComponent},
-            {path: 'autoparts/:id', component: AutomotiveEditorComponent},
             {path: 'services', component: ServicesComponent},
         ]
     }

@@ -14,6 +14,8 @@ namespace CarService.API.Helpers
             CreateMap<Photo, PhotoForReturnDto>();
             CreateMap<PhotoForCreationDto, Photo>();
             CreateMap<PartForCreationDto, AutomotivePart>();
+            CreateMap<PartForUpdateDto, AutomotivePart>();
+            CreateMap<UserForRegisterDto, User>();
         }
     }
 }

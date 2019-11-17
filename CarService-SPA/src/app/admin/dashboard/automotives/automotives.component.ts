@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { FileUploader } from 'ng2-file-upload';
 import { environment } from 'src/environments/environment';
 import { Photo } from 'src/app/_models/photo';
+import { AutoPartForUpdateDto } from 'src/app/_dtos/AutoPartForUpdateDto';
 
 @Component({
   selector: 'app-automotives',
@@ -24,6 +25,7 @@ export class AutomotivesComponent implements OnInit {
   types: AutoType[];
   suppliers: Supplier[];
   parts: AutoPart[];
+
   constructor(
     private autotypeService: AutotypeService,
     private alertify: AlertifyService,
@@ -83,10 +85,20 @@ export class AutomotivesComponent implements OnInit {
     const initialState = {
       title: 'Product Detail',
       part,
+      parts: this.parts,
       suppliers: this.suppliers,
       types: this.types
     };
     this.modalRef = this.modalService.show(ModalPartDetailComponent, { initialState });
+  }
+
+  openModalWithDeletePhotoComponent(part: AutoPart, photo: Photo) {
+    const initialState = {
+      title: 'Delete Photo',
+      part,
+      photo
+    };
+    this.modalRef = this.modalService.show(ModalPhotoDetailComponent, { initialState });
   }
 }
 
@@ -103,8 +115,8 @@ export class ModalPartDeleteComponent implements OnInit {
   constructor(
     public modalRef: BsModalRef,
     private autopartService: AutopartService,
-    private alertify: AlertifyService,
-    private router: Router
+    private alertify: AlertifyService
+    // private router: Router
   ) { }
 
   ngOnInit() { }
@@ -142,10 +154,7 @@ export class ModalPartImageComponent implements OnInit {
   baseUrl = environment.apiUrl;
 
   constructor(
-    public modalRef: BsModalRef,
-    private autopartService: AutopartService,
-    private alertify: AlertifyService,
-    private router: Router
+    public modalRef: BsModalRef
   ) { }
 
   ngOnInit() {
@@ -169,8 +178,7 @@ export class ModalPartImageComponent implements OnInit {
 
     this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; };
     this.uploader.onSuccessItem = (item, response, status, headers) => {
-      if (response)
-      {
+      if (response) {
         const res: Photo = JSON.parse(response);
         const photo = {
           id: res.id,
@@ -192,24 +200,80 @@ export class ModalPartImageComponent implements OnInit {
 export class ModalPartDetailComponent implements OnInit {
   title: string;
   part: AutoPart;
+  parts: AutoPart[];
   suppliers: Supplier[];
   types: AutoType[];
+  updatePart: AutoPartForUpdateDto = {
+    name: '',
+    description: '',
+    currentPrice: 0,
+    supplierId: 0,
+    automotivePartTypeId: 0
+  };
+  displayPart: AutoPart;
 
   baseUrl = environment.apiUrl;
 
   constructor(
     public modalRef: BsModalRef,
     private autopartService: AutopartService,
-    private alertify: AlertifyService,
-    private router: Router
+    private alertify: AlertifyService
+  ) { }
+
+  ngOnInit() {
+    this.displayPart = Object.assign({}, this.part);
+  }
+
+  saveChanges() {
+    this.updatePart.name = this.part.name;
+    this.updatePart.description = this.part.description;
+    this.updatePart.currentPrice = this.part.currentPrice;
+    this.updatePart.supplierId = this.part.supplier.id;
+    this.updatePart.automotivePartTypeId = this.part.automotivePartType.id;
+
+    // console.log(this.updatePart);
+    this.autopartService.updatePart(this.part.id, this.updatePart).subscribe(next => {
+      this.alertify.success('Updated successfully');
+      this.modalRef.hide();
+    }, error => {
+      this.alertify.error(error);
+    });
+  }
+}
+//#endregion
+
+//#region Modal delete photo component
+@Component({
+  selector: 'app-modal-image-detail',
+  templateUrl: './_template/photo-detail.html'
+})
+export class ModalPhotoDetailComponent implements OnInit {
+  title: string;
+  part: AutoPart;
+  photo: Photo;
+
+  baseUrl = environment.apiUrl;
+
+  constructor(
+    public modalRef: BsModalRef,
+    private autopartService: AutopartService,
+    private alertify: AlertifyService
   ) { }
 
   ngOnInit() {
   }
 
-  saveChanges(id: number) {
-    console.log('changes saved');
-    this.modalRef.hide();
+  deletePhoto(partId: number, id: number) {
+    this.autopartService.deletePhoto(partId, id).subscribe(() => {
+      this.alertify.success('Deleted');
+      this.modalRef.hide();
+      const index = this.part.photos.indexOf(this.photo, 0);
+      if (index > -1) {
+        this.part.photos.splice(index, 1);
+      }
+    }, error => {
+      this.alertify.error(error);
+    });
   }
 }
 //#endregion

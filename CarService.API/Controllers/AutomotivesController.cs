@@ -63,5 +63,31 @@ namespace CarService.API.Controllers
 
             throw new Exception($"Deleting car part {id} failed on save");
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdatePart(int id, PartForUpdateDto partForUpdateDto)
+        {
+            var partFromRepo = await _repo.GetPart(id);
+            
+            var part = _mapper.Map(partForUpdateDto, partFromRepo);
+
+            var sup = await _repo.GetSupplier(partForUpdateDto.SupplierId);
+            var type = await _repo.GetType(partForUpdateDto.AutomotivePartTypeId);
+
+            part.Supplier = sup;
+            part.AutomotivePartType = type;
+
+            _repo.Update(part);
+
+            // sup.AutomotiveParts.Add(part);
+            // type.AutomotiveParts.Add(part);
+            
+            if (await _repo.SaveAll())
+            {
+                return NoContent();
+            }
+
+            throw new Exception($"Updating user {id} failed on save");
+        }
     }
 }

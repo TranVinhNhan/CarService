@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { ClientComponent } from './client.component';
 import { ClientRoutingModule } from './client-routing.module';
@@ -14,7 +14,8 @@ import { LoginComponent } from './home/login/login.component';
   imports: [
     CommonModule,
     ClientRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [
     ClientComponent,
