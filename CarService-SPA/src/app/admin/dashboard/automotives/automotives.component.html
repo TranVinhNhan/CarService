@@ -5,7 +5,7 @@
         <div class="row m-b-25">
           <div class="col-md-12">
             <!-- DATA TABLE -->
-            <h3 class="title-5 m-b-35">data table</h3>
+            <h3 class="title-5 m-b-35">automotive parts</h3>
             <div class="table-data__tool">
               <div class="table-data__tool-left">
                 <div class="rs-select2--light rs-select2--md">
@@ -46,7 +46,7 @@
 
               <div id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true">
                 <div class="well well-lg card card-block card-header">
-                  <app-automotive-editor></app-automotive-editor>
+                  <app-automotive-editor [parts]='parts'></app-automotive-editor>
                 </div>
               </div>
 
@@ -81,7 +81,7 @@
                     <td>
                       <span class="block-email">{{part.description}}</span>
                     </td>
-                    <td class="desc">{{part.currentPrice}}</td>
+                    <td class="desc">${{part.currentPrice}}</td>
                     <td>
                       <span class="status--process">Available</span>
                     </td>
@@ -90,7 +90,8 @@
                     <td>
                       <div class="row">
                         <div style="cursor: pointer;" class="col-md-3" *ngFor="let photo of part.photos">
-                          <img (click)="openModalWithDeletePhotoComponent(part, photo)" src="{{photo.url}}" class="img-thumbnail p-1" style="width: 50px;" alt="">
+                          <img (click)="openModalWithDeletePhotoComponent(part, photo)" src="{{photo.url}}"
+                            class="img-thumbnail p-1" style="width: 50px;" alt="">
                         </div>
                       </div>
                     </td>
@@ -121,47 +122,11 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-lg-8 pr-1">
-            <h2 class="title-1 m-b-25">Product Types</h2>
-            <div class="table-responsive table--no-card m-b-30">
-              <table class="table table-borderless table-striped table-earning">
-                <thead>
-                  <tr>
-                    <th>type name</th>
-                    <th>car model</th>
-                    <th>brand</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let type of types">
-                    <td>{{type.typeName}}</td>
-                    <td>{{type.carModel}}</td>
-                    <td>{{type.brand}}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+          <div class="col-lg-6 pr-1">
+            <app-automotive-types></app-automotive-types>
           </div>
-          <div class="col-lg-4 pl-1">
-            <h2 class="title-1 m-b-25">Suppliers</h2>
-            <div class="table-responsive table--no-card m-b-30">
-              <table class="table table-borderless table-striped table-earning">
-                <thead>
-                  <tr>
-                    <th>name</th>
-                    <th>address</th>
-                    <th>contact</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let supplier of suppliers">
-                    <td>{{supplier.name}}</td>
-                    <td>{{supplier.address}}</td>
-                    <td>{{supplier.contact}}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+          <div class="col-lg-6 pl-1">
+            <app-automotive-suppliers></app-automotive-suppliers>
           </div>
         </div>
       </div>

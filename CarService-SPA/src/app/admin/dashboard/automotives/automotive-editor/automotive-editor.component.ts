@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, ElementRef } from '@angular/core';
 import { AutotypeService } from 'src/app/_services/autotype.service';
 import { SupplierService } from 'src/app/_services/supplier.service';
 import { AutoType } from 'src/app/_models/autotype';
@@ -6,6 +6,8 @@ import { Supplier } from 'src/app/_models/supplier';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { AutopartService } from 'src/app/_services/autopart.service';
 import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
+import { AutoPart } from 'src/app/_models/autopart';
 
 @Component({
   selector: 'app-automotive-editor',
@@ -16,9 +18,10 @@ import { Router } from '@angular/router';
 export class AutomotiveEditorComponent implements OnInit {
   types: AutoType[];
   suppliers: Supplier[];
+  part: AutoPart;
   model: any = {};
-
-
+  @Input() parts: AutoPart[];
+  @ViewChild('resetBtn', { static: false }) resetBtn: ElementRef<HTMLElement>;
 
   constructor(
     private alertify: AlertifyService,
@@ -47,13 +50,23 @@ export class AutomotiveEditorComponent implements OnInit {
   }
 
   addItem() {
-    this.autopartService.addPart(this.model).subscribe(() => {
+    this.autopartService.addPart(this.model).subscribe((response: any) => {
       this.alertify.success('Item Added');
-      this.router.navigateByUrl('/admin/', { skipLocationChange: true }).then(() => {
-        this.router.navigate(['/admin/autoparts']);
-      });
+      console.log(response);
+      this.parts.push(response);
+
+      // this.router.navigateByUrl('/admin/', { skipLocationChange: true }).then(() => {
+      //   this.router.navigate(['/admin/autoparts']);
+      // });
     }, error => {
       this.alertify.error(error);
+    }, () => {
+      // this.part = Object.assign({}, this.model);
+      // this.part.automotivePartType = this.types.find(x => x.id === this.model.automotivePartTypeId);
+      // this.part.supplier = this.suppliers.find(x => x.id === this.model.supplierId);
+      // this.parts.push(this.part);
+      const reset: HTMLElement = this.resetBtn.nativeElement;
+      reset.click();
     });
   }
 }

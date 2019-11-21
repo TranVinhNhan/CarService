@@ -129,9 +129,6 @@ export class ModalPartDeleteComponent implements OnInit {
       if (index > -1) {
         this.parts.splice(index, 1);
       }
-      // this.router.navigateByUrl('/admin', { skipLocationChange: true }).then(() => {
-      //   this.router.navigate(['/admin/autoparts']);
-      // });
     }, error => {
       this.alertify.error(error);
     });

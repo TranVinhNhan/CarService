@@ -83,7 +83,7 @@ namespace CarService.API.Repositories
         public async Task<Supplier> GetSupplier(int id)
         {
             var sup = await _context.Suppliers.Include(p => p.AutomotiveParts).FirstOrDefaultAsync(s => s.Id == id);
-            
+
             return sup;
         }
 
@@ -110,6 +110,16 @@ namespace CarService.API.Repositories
             var photo = await _context.Photos.FirstOrDefaultAsync(p => p.Id == id);
 
             return photo;
+        }
+
+        public async Task<Service> GetService(int id)
+        {
+            var service = await _context.Services
+                .Include(s => s.CarReceiptServices)
+                .ThenInclude(s => s.CarReceipt)
+                .FirstOrDefaultAsync(s => s.Id == id);
+
+            return service;
         }
     }
 }

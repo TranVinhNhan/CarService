@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import { AuthService } from './_services/auth.service';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { AlertifyService } from './_services/alertify.service';
-import { AuthGuard } from './_services/auth.guard';
+import { AuthGuard } from './_guards/auth.guard';
 
 export function getToken() {
   return localStorage.getItem('token');

@@ -22,9 +22,14 @@ import {
 import { AutotypeService } from '../_services/autotype.service';
 import { SupplierService } from '../_services/supplier.service';
 import { AutopartService } from '../_services/autopart.service';
-import { ServicesComponent } from './dashboard/services/services.component';
+import { ServicesComponent, ModalServiceDeleteComponent, ModalServiceDetailComponent } from './dashboard/services/services.component';
 import { ServicesService } from '../_services/services.service';
 import { AutomotiveEditorComponent } from './dashboard/automotives/automotive-editor/automotive-editor.component';
+import { TypesComponent } from './dashboard/automotives/types/types.component';
+import { SuppliersComponent } from './dashboard/automotives/suppliers/suppliers.component';
+import { ServiceEditorComponent } from './dashboard/services/service-editor/service-editor.component';
+import { TypeEditorComponent } from './dashboard/automotives/type-editor/type-editor.component';
+import { SupplierEditorComponent } from './dashboard/automotives/supplier-editor/supplier-editor.component';
 
 
 @NgModule({
@@ -46,14 +51,22 @@ import { AutomotiveEditorComponent } from './dashboard/automotives/automotive-ed
     HeaderComponent,
     UsersComponent,
     AutomotivesComponent,
+    AutomotiveEditorComponent,
     ServicesComponent,
+    ServiceEditorComponent,
+    TypesComponent,
+    TypeEditorComponent,
+    SuppliersComponent,
+    SupplierEditorComponent,
+
     ModalUserDeleteComponent,
     ModalUserDetailComponent,
     ModalPartDeleteComponent,
-    AutomotiveEditorComponent,
     ModalPartImageComponent,
     ModalPartDetailComponent,
-    ModalPhotoDetailComponent
+    ModalPhotoDetailComponent,
+    ModalServiceDeleteComponent,
+    ModalServiceDetailComponent
   ],
   providers: [
     UserService,
@@ -68,7 +81,9 @@ import { AutomotiveEditorComponent } from './dashboard/automotives/automotive-ed
     ModalPartDeleteComponent,
     ModalPartImageComponent,
     ModalPartDetailComponent,
-    ModalPhotoDetailComponent
+    ModalPhotoDetailComponent,
+    ModalServiceDeleteComponent,
+    ModalServiceDetailComponent
   ]
 })
 export class AdminModule { }

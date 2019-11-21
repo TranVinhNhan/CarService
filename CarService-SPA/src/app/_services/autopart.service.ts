@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AutoPart } from '../_models/autopart';
 import { AutoPartForUpdateDto } from '../_dtos/AutoPartForUpdateDto';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -23,12 +24,16 @@ export class AutopartService {
     return this.http.get<AutoPart>(this.baseUrl + 'automotives/' + id);
   }
 
-  deletePart(id: number): Observable<any> {
+  deletePart(id: number) {
     return this.http.delete(this.baseUrl + 'automotives/delete/' + id);
   }
 
-  addPart(model: any) {
-    return this.http.post(this.baseUrl + 'automotives', model);
+  addPart(model: any): Observable<any> {
+    return this.http.post(this.baseUrl + 'automotives', model).pipe(
+      map((response: any) => {
+        return response;
+      }
+      ));
   }
 
   deletePhoto(userId: number, id: number) {

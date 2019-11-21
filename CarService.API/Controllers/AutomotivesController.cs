@@ -22,6 +22,7 @@ namespace CarService.API.Controllers
             _repo = repo;
         }
 
+
         [HttpPost]
         public async Task<IActionResult> AddAutoPart(PartForCreationDto partForCreationDto)
         {
@@ -31,10 +32,14 @@ namespace CarService.API.Controllers
 
             sup.AutomotiveParts.Add(part);
             type.AutomotiveParts.Add(part);
-            await _repo.SaveAll();
-            return Ok();
+            if (await _repo.SaveAll())
+            {
+                return CreatedAtRoute("GetPart", new { controller = "Automotives", id = part.Id }, part);
+            }
+            throw new Exception ($"Adding Car Part {partForCreationDto.Name} failed on save");
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetAllParts()
         {
@@ -43,7 +48,8 @@ namespace CarService.API.Controllers
             return Ok(parts);
         }
 
-        [HttpGet("{id}")]
+        [AllowAnonymous]
+        [HttpGet("{id}", Name = "GetPart")]
         public async Task<IActionResult> GetPart(int id)
         {
             var part = await _repo.GetPart(id);
@@ -68,7 +74,7 @@ namespace CarService.API.Controllers
         public async Task<IActionResult> UpdatePart(int id, PartForUpdateDto partForUpdateDto)
         {
             var partFromRepo = await _repo.GetPart(id);
-            
+
             var part = _mapper.Map(partForUpdateDto, partFromRepo);
 
             var sup = await _repo.GetSupplier(partForUpdateDto.SupplierId);
@@ -77,11 +83,11 @@ namespace CarService.API.Controllers
             part.Supplier = sup;
             part.AutomotivePartType = type;
 
-            _repo.Update(part);
+            // _repo.Update(part);
 
             // sup.AutomotiveParts.Add(part);
             // type.AutomotiveParts.Add(part);
-            
+
             if (await _repo.SaveAll())
             {
                 return NoContent();

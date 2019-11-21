@@ -9,6 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './footer/footer.component';
 import { RegisterComponent } from './home/register/register.component';
 import { LoginComponent } from './home/login/login.component';
+import { AutopartService } from '../_services/autopart.service';
 
 @NgModule({
   imports: [
@@ -25,6 +26,8 @@ import { LoginComponent } from './home/login/login.component';
     RegisterComponent,
     LoginComponent
   ],
-  providers: []
+  providers: [
+    AutopartService
+  ]
 })
 export class ClientModule { }

@@ -1,0 +1,41 @@
+<h2 class="title-1 m-b-25">Suppliers</h2>
+<button class="au-btn au-btn-icon au-btn--green au-btn--small mb-2" type="button" (click)="isCollapsed = !isCollapsed"
+  [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">
+  <i class="zmdi zmdi-plus"></i>add item</button>
+<div id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true">
+  <div class="well well-lg card card-block card-header">
+    <app-supplier-editor></app-supplier-editor>
+  </div>
+</div>
+<div class="table-responsive table--no-card m-b-30">
+  <table class="table table-borderless table-striped table-earning">
+    <thead>
+      <tr>
+        <th>name</th>
+        <th>address</th>
+        <th>contact</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let supplier of suppliers">
+        <td>{{supplier.name}}</td>
+        <td>{{supplier.address}}</td>
+        <td>{{supplier.contact}}</td>
+        <td>
+          <div class="table-data-feature">
+            <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+              <i class="zmdi zmdi-edit"></i>
+            </button>
+            <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
+              <i class="zmdi zmdi-delete"></i>
+            </button>
+            <button class="item" data-toggle="tooltip" data-placement="top" title="More">
+              <i class="zmdi zmdi-more"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
