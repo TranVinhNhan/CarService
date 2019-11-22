@@ -4,7 +4,7 @@
   <i class="zmdi zmdi-plus"></i>add item</button>
 <div id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true">
   <div class="well well-lg card card-block card-header">
-    <app-supplier-editor></app-supplier-editor>
+    <app-supplier-editor [suppliers]="suppliers"></app-supplier-editor>
   </div>
 </div>
 <div class="table-responsive table--no-card m-b-30">
@@ -24,10 +24,12 @@
         <td>{{supplier.contact}}</td>
         <td>
           <div class="table-data-feature">
-            <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+            <button class="item" data-toggle="tooltip" data-placement="top" title="Edit"
+            (click)="openModalWithDetailComponent(supplier)">
               <i class="zmdi zmdi-edit"></i>
             </button>
-            <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
+            <button class="item" data-toggle="tooltip" data-placement="top" title="Delete"
+            (click)="openModalWithDeleteComponent(supplier)">
               <i class="zmdi zmdi-delete"></i>
             </button>
             <button class="item" data-toggle="tooltip" data-placement="top" title="More">

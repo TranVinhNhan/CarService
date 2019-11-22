@@ -1,0 +1,40 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">{{title}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<form #typeDetail="ngForm" id="typeDetail" (ngSubmit)="saveChanges(type.id)">
+    <div class="modal-body">
+            <div class="row form-group">
+                    <div class="col col-md-3">
+                      <label for="text-input" class=" form-control-label">Type Name</label>
+                    </div>
+                    <div class="col-12 col-md-9">
+                      <input type="text" required [(ngModel)]="model.typeName" id="type-text-input" name="type-text-input" placeholder="" class="form-control">
+                    </div>
+                  </div>
+        
+                  <div class="row form-group">
+                    <div class="col col-md-3">
+                      <label for="text-input" class=" form-control-label">Car Model</label>
+                    </div>
+                    <div class="col-12 col-md-9">
+                      <input type="text" required [(ngModel)]="model.carModel" id="model-text-input" name="model-text-input" placeholder="" class="form-control">
+                    </div>
+                  </div>
+        
+                  <div class="row form-group">
+                    <div class="col col-md-3">
+                      <label for="text-input" class=" form-control-label">Brand</label>
+                    </div>
+                    <div class="col-12 col-md-9">
+                      <input type="text" required [(ngModel)]="model.brand" id="brand-text-input" name="brand-text-input" placeholder="" class="form-control">
+                    </div>
+                  </div>
+    </div>
+</form>
+<div class="modal-footer">
+    <button type="submit" class="btn btn-success" form="typeDetail">Save changes</button>
+    <button type="button" class="btn btn-primary" (click)="modalRef.hide()">Cancel</button>
+</div>

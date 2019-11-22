@@ -24,6 +24,9 @@ namespace CarService.API.Helpers
 
             CreateMap<TypeForCreationDto, AutomotivePartType>();
             CreateMap<TypeForUpdateDto, AutomotivePartType>();
+
+            CreateMap<SupplierForCreationDto, Supplier>();
+            CreateMap<SupplierForUpdateDto, Supplier>();
         }
     }
 }

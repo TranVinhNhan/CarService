@@ -5,13 +5,13 @@
         <strong>Add Supplier</strong>
       </div>
       <div class="card-body card-block">
-        <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+        <form action="" method="post" #typeEdit id="typeEdit" class="form-horizontal" (submit)="addSupplier()">
           <div class="row form-group">
             <div class="col col-md-3">
               <label for="text-input" class=" form-control-label">Supplier Name</label>
             </div>
             <div class="col-12 col-md-9">
-              <input type="text" id="name-text-input" name="name-text-input" placeholder="" class="form-control">
+              <input type="text" required [(ngModel)]="model.name" id="name-text-input" name="name-text-input" placeholder="" class="form-control">
             </div>
           </div>
 
@@ -20,7 +20,7 @@
               <label for="text-input" class=" form-control-label">Address</label>
             </div>
             <div class="col-12 col-md-9">
-              <input type="text" id="address-text-input" name="address-text-input" placeholder="" class="form-control">
+              <input type="text" required [(ngModel)]="model.address" id="address-text-input" name="address-text-input" placeholder="" class="form-control">
             </div>
           </div>
 
@@ -29,16 +29,16 @@
               <label for="text-input" class=" form-control-label">Contact</label>
             </div>
             <div class="col-12 col-md-9">
-              <input type="text" id="contact-text-input" name="contact-text-input" placeholder="" class="form-control">
+              <input type="text" required [(ngModel)]="model.contact" id="contact-text-input" name="contact-text-input" placeholder="" class="form-control">
             </div>
           </div>
         </form>
       </div>
       <div class="card-footer">
-        <button type="submit" class="btn btn-primary btn-sm">
+        <button type="submit" form="typeEdit" class="btn btn-primary btn-sm">
           <i class="fa fa-dot-circle-o"></i> Submit
         </button>
-        <button type="reset" class="btn btn-danger btn-sm">
+        <button #resetBtn type="reset" form="typeEdit" class="btn btn-danger btn-sm">
           <i class="fa fa-ban"></i> Reset
         </button>
       </div>

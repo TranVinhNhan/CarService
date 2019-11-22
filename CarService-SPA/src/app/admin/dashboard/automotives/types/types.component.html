@@ -24,10 +24,12 @@
         <td>{{type.brand}}</td>
         <td>
           <div class="table-data-feature">
-            <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+            <button class="item" data-toggle="tooltip" data-placement="top" title="Edit"
+            (click)="openModalWithDetailComponent(type)">
               <i class="zmdi zmdi-edit"></i>
             </button>
-            <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
+            <button class="item" data-toggle="tooltip" data-placement="top" title="Delete"
+              (click)="openModalWithDeleteComponent(type)">
               <i class="zmdi zmdi-delete"></i>
             </button>
             <button class="item" data-toggle="tooltip" data-placement="top" title="More">

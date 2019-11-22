@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { AutotypeService } from 'src/app/_services/autotype.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { AutoType } from 'src/app/_models/autotype';
@@ -12,6 +12,8 @@ export class TypeEditorComponent implements OnInit {
 
   model: any = {};
   @Input() types: AutoType[];
+  @ViewChild('resetBtn', { static: false }) resetBtn: ElementRef<HTMLElement>;
+
   constructor(
     private autotypeService: AutotypeService,
     private alertify: AlertifyService
@@ -20,10 +22,14 @@ export class TypeEditorComponent implements OnInit {
   ngOnInit() {
   }
 
-  // addType() {
-  //   this.autotypeService.addType(this.model).subscribe((response: any) => {
-  //     this.alertify.success('Type Added');
-  //     this.types.push(response);
-  //   })
-  // }
+  addType() {
+    this.autotypeService.addType(this.model).subscribe((response: any) => {
+      this.alertify.success('Type Added');
+      this.types.push(response);
+      const reset: HTMLElement = this.resetBtn.nativeElement;
+      reset.click();
+    }, error => {
+      this.alertify.error(error);
+    });
+  }
 }

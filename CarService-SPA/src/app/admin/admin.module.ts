@@ -25,8 +25,12 @@ import { AutopartService } from '../_services/autopart.service';
 import { ServicesComponent, ModalServiceDeleteComponent, ModalServiceDetailComponent } from './dashboard/services/services.component';
 import { ServicesService } from '../_services/services.service';
 import { AutomotiveEditorComponent } from './dashboard/automotives/automotive-editor/automotive-editor.component';
-import { TypesComponent } from './dashboard/automotives/types/types.component';
-import { SuppliersComponent } from './dashboard/automotives/suppliers/suppliers.component';
+import { TypesComponent, ModalTypeDeleteComponent, ModalTypeDetailComponent } from './dashboard/automotives/types/types.component';
+import {
+  SuppliersComponent,
+  ModalSupplierDeleteComponent,
+  ModalSupplierDetailComponent
+} from './dashboard/automotives/suppliers/suppliers.component';
 import { ServiceEditorComponent } from './dashboard/services/service-editor/service-editor.component';
 import { TypeEditorComponent } from './dashboard/automotives/type-editor/type-editor.component';
 import { SupplierEditorComponent } from './dashboard/automotives/supplier-editor/supplier-editor.component';
@@ -66,7 +70,11 @@ import { SupplierEditorComponent } from './dashboard/automotives/supplier-editor
     ModalPartDetailComponent,
     ModalPhotoDetailComponent,
     ModalServiceDeleteComponent,
-    ModalServiceDetailComponent
+    ModalServiceDetailComponent,
+    ModalTypeDeleteComponent,
+    ModalTypeDetailComponent,
+    ModalSupplierDeleteComponent,
+    ModalSupplierDetailComponent
   ],
   providers: [
     UserService,
@@ -83,7 +91,11 @@ import { SupplierEditorComponent } from './dashboard/automotives/supplier-editor
     ModalPartDetailComponent,
     ModalPhotoDetailComponent,
     ModalServiceDeleteComponent,
-    ModalServiceDetailComponent
+    ModalServiceDetailComponent,
+    ModalTypeDeleteComponent,
+    ModalTypeDetailComponent,
+    ModalSupplierDeleteComponent,
+    ModalSupplierDetailComponent
   ]
 })
 export class AdminModule { }

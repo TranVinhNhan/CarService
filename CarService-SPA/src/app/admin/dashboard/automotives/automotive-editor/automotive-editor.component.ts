@@ -6,7 +6,6 @@ import { Supplier } from 'src/app/_models/supplier';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { AutopartService } from 'src/app/_services/autopart.service';
 import { Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
 import { AutoPart } from 'src/app/_models/autopart';
 
 @Component({
@@ -54,17 +53,9 @@ export class AutomotiveEditorComponent implements OnInit {
       this.alertify.success('Item Added');
       console.log(response);
       this.parts.push(response);
-
-      // this.router.navigateByUrl('/admin/', { skipLocationChange: true }).then(() => {
-      //   this.router.navigate(['/admin/autoparts']);
-      // });
     }, error => {
       this.alertify.error(error);
     }, () => {
-      // this.part = Object.assign({}, this.model);
-      // this.part.automotivePartType = this.types.find(x => x.id === this.model.automotivePartTypeId);
-      // this.part.supplier = this.suppliers.find(x => x.id === this.model.supplierId);
-      // this.parts.push(this.part);
       const reset: HTMLElement = this.resetBtn.nativeElement;
       reset.click();
     });
