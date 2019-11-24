@@ -64,7 +64,7 @@ namespace CarService.API.Controllers
                     var uploadParams = new ImageUploadParams()
                     {
                         File = new FileDescription(file.Name, stream),
-                        Transformation = new Transformation().Width(500).Height(500).Crop("fill")
+                        Transformation = new Transformation().Width(720).Height(960).Crop("fill")
                     };
 
                     uploadResult = _cloudinary.Upload(uploadParams);

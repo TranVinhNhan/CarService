@@ -2,8 +2,10 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ClientComponent } from './client.component';
 import { HomeComponent } from './home/home.component';
-import { RegisterComponent } from './home/register/register.component';
-import { LoginComponent } from './home/login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { ProductDetailResolver } from '../_resolvers/product-detail.resolver';
 
 
 const routes: Routes = [
@@ -13,7 +15,8 @@ const routes: Routes = [
         children: [
             {path: '', component: HomeComponent},
             {path: 'register', component: RegisterComponent},
-            {path: 'login', component: LoginComponent}
+            {path: 'login', component: LoginComponent},
+            {path: 'products/:id', component: ProductDetailComponent, resolve: {part: ProductDetailResolver}}
         ]
     }
 ];

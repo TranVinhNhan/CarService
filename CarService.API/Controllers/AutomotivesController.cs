@@ -83,17 +83,12 @@ namespace CarService.API.Controllers
             part.Supplier = sup;
             part.AutomotivePartType = type;
 
-            // _repo.Update(part);
-
-            // sup.AutomotiveParts.Add(part);
-            // type.AutomotiveParts.Add(part);
-
             if (await _repo.SaveAll())
             {
                 return NoContent();
             }
 
-            throw new Exception($"Updating user {id} failed on save");
+            throw new Exception($"Updating product {id} failed on save");
         }
     }
 }

@@ -1,13 +1,11 @@
 [
     {
-        "Name": "Germany Chair",
-        "Description": "Best chair",
-        "CurrentPrice": 30.99,
+        "Name": "Ford Ranger Seat",
+        "Description": "Best seat",
+        "CurrentPrice": 279.99,
         "AutomotivePartType": 
         {
-            "TypeName": "Chair",
-            "CarModel": "Ranger",
-            "Brand": "Ford",
+            "TypeName": "Seat",
             "AutomotiveParts": []
         },
         "Supplier": 
@@ -21,14 +19,12 @@
         "AutomotivePartRepairReceipts": []
     },
     {
-        "Name": "Germany Mirror",
+        "Name": "Audi E-Tron Virtual Mirror",
         "Description": "Best mirror",
-        "CurrentPrice": 50.99,
+        "CurrentPrice": 300,
         "AutomotivePartType": 
         {
             "TypeName": "Mirror",
-            "CarModel": "Morning",
-            "Brand": "KIA",
             "AutomotiveParts": []
         },
         "Supplier": 
@@ -42,14 +38,12 @@
         "AutomotivePartRepairReceipts": []
     },
     {
-        "Name": "Germany Tires",
-        "Description": "Best tires",
-        "CurrentPrice": 300.99,
+        "Name": "FOOSE-F105 LENGEND",
+        "Description": "Best wheel",
+        "CurrentPrice": 299.99,
         "AutomotivePartType": 
         {
-            "TypeName": "Tire",
-            "CarModel": "Wigo",
-            "Brand": "Toyota",
+            "TypeName": "Wheel",
             "AutomotiveParts": []
         },
         "Supplier": 
@@ -63,14 +57,12 @@
         "AutomotivePartRepairReceipts": []
     },
     {
-        "Name": "Germany Wheel",
-        "Description": "Best wheel",
-        "CurrentPrice": 99.99,
+        "Name": "MOMO Steering Wheel",
+        "Description": "Best Steering wheel",
+        "CurrentPrice": 140.50,
         "AutomotivePartType": 
         {
-            "TypeName": "Wheel",
-            "CarModel": "RX6",
-            "Brand": "Audi",
+            "TypeName": "Steering Wheel",
             "AutomotiveParts": []
         },
         "Supplier": 
@@ -84,35 +76,12 @@
         "AutomotivePartRepairReceipts": []
     },
     {
-        "Name": "Italy Chair",
-        "Description": "Another best chair",
-        "CurrentPrice": 30.99,
+        "Name": "Luxury Leather Fabric Seat",
+        "Description": "Best seat",
+        "CurrentPrice": 199.99,
         "AutomotivePartType": 
         {
-            "TypeName": "Chair",
-            "CarModel": "EcoSport",
-            "Brand": "Ford",
-            "AutomotiveParts": []
-        },
-        "Supplier": 
-        {
-            "Name": "Quận 5",
-            "Address": "TPHCM",
-            "Contact": "test@gmail.com",
-            "AutomotiveParts": []
-        },
-        "Photos": [],
-        "AutomotivePartRepairReceipts": []
-    },
-    {
-        "Name": "Germany Chair 2",
-        "Description": "Best chair 2",
-        "CurrentPrice": 30.99,
-        "AutomotivePartType": 
-        {
-            "TypeName": "Chair 2",
-            "CarModel": "Ranger",
-            "Brand": "Ford",
+            "TypeName": "Leather Seat",
             "AutomotiveParts": []
         },
         "Supplier": 

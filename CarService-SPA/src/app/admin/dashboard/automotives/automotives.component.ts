@@ -11,7 +11,6 @@ import { Router } from '@angular/router';
 import { FileUploader } from 'ng2-file-upload';
 import { environment } from 'src/environments/environment';
 import { Photo } from 'src/app/_models/photo';
-import { AutoPartForUpdateDto } from 'src/app/_dtos/AutoPartForUpdateDto';
 
 @Component({
   selector: 'app-automotives',
@@ -200,14 +199,7 @@ export class ModalPartDetailComponent implements OnInit {
   parts: AutoPart[];
   suppliers: Supplier[];
   types: AutoType[];
-  updatePart: AutoPartForUpdateDto = {
-    name: '',
-    description: '',
-    currentPrice: 0,
-    supplierId: 0,
-    automotivePartTypeId: 0
-  };
-  displayPart: AutoPart;
+  model: any = {};
 
   baseUrl = environment.apiUrl;
 
@@ -218,31 +210,28 @@ export class ModalPartDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.displayPart = Object.assign({}, this.part);
+    this.model = Object.assign({}, this.part);
+    this.model.automotivePartTypeId = this.part.automotivePartType.id;
+    this.model.supplierId = this.part.supplier.id;
   }
 
   saveChanges() {
-    this.updatePart.name = this.part.name;
-    this.updatePart.description = this.part.description;
-    this.updatePart.currentPrice = this.part.currentPrice;
-    this.updatePart.supplierId = this.part.supplier.id;
-    this.updatePart.automotivePartTypeId = this.part.automotivePartType.id;
-
-    // console.log(this.updatePart);
-    this.autopartService.updatePart(this.part.id, this.updatePart).subscribe(next => {
-      this.alertify.success('Updated successfully');
-      this.modalRef.hide();
-    }, error => {
-      this.alertify.error(error);
-    }, () => {
-      this.autopartService.getPart(this.part.id).subscribe((part: AutoPart) => {
-        const index = this.parts.indexOf(this.part);
-        this.parts[index] = part;
-        console.log(part);
+    this.autopartService.updatePart(this.part.id, this.model).subscribe(
+      next => {
+        this.alertify.success('Updated successfully');
+        this.modalRef.hide();
+        const index = this.parts.indexOf(this.part, 0);
+        if (index > -1) {
+          this.part = Object.assign({}, this.model);
+          const type = this.types.find(x => x.id === this.model.automotivePartTypeId);
+          const supplier = this.suppliers.find(x => x.id === this.model.supplierId);
+          this.parts[index] = this.part;
+          this.parts[index].automotivePartType = type;
+          this.parts[index].supplier = supplier;
+        }
       }, error => {
         this.alertify.error(error);
       });
-    });
   }
 }
 //#endregion

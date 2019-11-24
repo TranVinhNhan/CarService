@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['../../client.component.css']
+  styleUrls: ['../client.component.css']
 })
 export class RegisterComponent implements OnInit {
 
@@ -59,7 +59,7 @@ export class RegisterComponent implements OnInit {
       }, () => {
         this.authService.login(this.user).subscribe(() => {
           this.router.navigate(['/']);
-        })
+        });
       });
     }
   }

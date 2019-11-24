@@ -18,6 +18,7 @@ namespace CarService.API.Data
         public DbSet<RepairReceipt> RepairReceipt { get; set; }
         public DbSet<AutomotivePartRepairReceipt> AutomotivePartRepairReceipt { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AutomotivePartRepairReceipt>()

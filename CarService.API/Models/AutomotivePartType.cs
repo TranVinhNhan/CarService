@@ -6,8 +6,6 @@ namespace CarService.API.Models
     {
         public int Id { get; set; }
         public string TypeName { get; set; }
-        public string CarModel { get; set; }
-        public string Brand { get; set; }
         
         public ICollection<AutomotivePart> AutomotiveParts { get; set; }
     }

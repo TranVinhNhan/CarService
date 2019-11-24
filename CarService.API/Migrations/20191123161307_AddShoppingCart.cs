@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CarService.API.Migrations
 {
-    public partial class Init : Migration
+    public partial class AddShoppingCart : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,9 +13,7 @@ namespace CarService.API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    TypeName = table.Column<string>(nullable: true),
-                    CarModel = table.Column<string>(nullable: true),
-                    Brand = table.Column<string>(nullable: true)
+                    TypeName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -151,6 +149,26 @@ namespace CarService.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ShoppingCartItems",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    Quantity = table.Column<int>(nullable: false),
+                    AutomotivePartId = table.Column<int>(nullable: false),
+                    ShoppingCartId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ShoppingCartItems", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ShoppingCartItems_AutomotiveParts_AutomotivePartId",
+                        column: x => x.AutomotivePartId,
+                        principalTable: "AutomotiveParts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CarReceiptService",
                 columns: table => new
                 {
@@ -262,6 +280,11 @@ namespace CarService.API.Migrations
                 table: "RepairReceipt",
                 column: "CarReceiptId",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ShoppingCartItems_AutomotivePartId",
+                table: "ShoppingCartItems",
+                column: "AutomotivePartId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -274,6 +297,9 @@ namespace CarService.API.Migrations
 
             migrationBuilder.DropTable(
                 name: "Photos");
+
+            migrationBuilder.DropTable(
+                name: "ShoppingCartItems");
 
             migrationBuilder.DropTable(
                 name: "RepairReceipt");

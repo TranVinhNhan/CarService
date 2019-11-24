@@ -4,12 +4,14 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { ClientComponent } from './client.component';
 import { ClientRoutingModule } from './client-routing.module';
-import { NavComponent } from './nav/nav.component';
+import { NavComponent } from './_nav/nav.component';
 import { HomeComponent } from './home/home.component';
-import { FooterComponent } from './footer/footer.component';
-import { RegisterComponent } from './home/register/register.component';
-import { LoginComponent } from './home/login/login.component';
+import { FooterComponent } from './_footer/footer.component';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
 import { AutopartService } from '../_services/autopart.service';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { ProductDetailResolver } from '../_resolvers/product-detail.resolver';
 
 @NgModule({
   imports: [
@@ -24,10 +26,12 @@ import { AutopartService } from '../_services/autopart.service';
     HomeComponent,
     FooterComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    ProductDetailComponent
   ],
   providers: [
-    AutopartService
+    AutopartService,
+    ProductDetailResolver
   ]
 })
 export class ClientModule { }

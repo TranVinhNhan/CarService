@@ -66,10 +66,6 @@ namespace CarService.API.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Brand");
-
-                    b.Property<string>("CarModel");
-
                     b.Property<string>("TypeName");
 
                     b.HasKey("Id");
@@ -163,6 +159,24 @@ namespace CarService.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Services");
+                });
+
+            modelBuilder.Entity("CarService.API.Models.ShoppingCartItem", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AutomotivePartId");
+
+                    b.Property<int>("Quantity");
+
+                    b.Property<string>("ShoppingCartId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AutomotivePartId");
+
+                    b.ToTable("ShoppingCartItems");
                 });
 
             modelBuilder.Entity("CarService.API.Models.Supplier", b =>
@@ -276,6 +290,14 @@ namespace CarService.API.Migrations
                     b.HasOne("CarService.API.Models.CarReceipt", "CarReceipt")
                         .WithOne("RepairReceipt")
                         .HasForeignKey("CarService.API.Models.RepairReceipt", "CarReceiptId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("CarService.API.Models.ShoppingCartItem", b =>
+                {
+                    b.HasOne("CarService.API.Models.AutomotivePart", "AutomotivePart")
+                        .WithMany()
+                        .HasForeignKey("AutomotivePartId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

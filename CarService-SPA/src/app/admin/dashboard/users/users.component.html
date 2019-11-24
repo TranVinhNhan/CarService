@@ -63,6 +63,8 @@
                                             <td>
                                                 <span *ngIf="(user.role==='Admin')"
                                                     class="role admin">{{user.role}}</span>
+                                                <span *ngIf="(user.role==='Staff')"
+                                                    class="role member">{{user.role}}</span>
                                                 <span *ngIf="(user.role==='User')"
                                                     class="role user">{{user.role}}</span>
                                             </td>

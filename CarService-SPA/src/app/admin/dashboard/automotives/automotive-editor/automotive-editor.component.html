@@ -30,7 +30,7 @@
                             <label for="text-input" class=" form-control-label">Price</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <input type="number" required [(ngModel)]="model.currentPrice" id="price" name="text-input"
+                            <input type="number" required [(ngModel)]="model.currentPrice" id="price" name="price"
                                 placeholder="0.00" class="form-control">
                         </div>
                     </div>
@@ -39,7 +39,7 @@
                             <label for="select" class=" form-control-label">Type</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <select [(ngModel)]="model.automotivePartTypeId" name="select" id="select-type"
+                            <select [(ngModel)]="model.automotivePartTypeId" name="select-type" id="select-type"
                                 class="form-control">
                                 <option [ngValue]="" disabled selected hidden>Choose product type</option>
                                 <option *ngFor="let type of types" [ngValue]="type.id">{{type.typeName}}</option>
@@ -51,7 +51,7 @@
                             <label for="select" class=" form-control-label">Supplier</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <select [(ngModel)]="model.supplierId" name="select" id="select-supplier"
+                            <select [(ngModel)]="model.supplierId" name="select-supplier" id="select-supplier"
                                 class="form-control">
                                 <option [selected]="true" disabled selected hidden>Choose supplier</option>
                                 <option *ngFor="let supplier of suppliers" [ngValue]="supplier.id">{{supplier.name}}

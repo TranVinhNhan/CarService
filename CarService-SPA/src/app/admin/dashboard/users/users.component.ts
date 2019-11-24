@@ -117,7 +117,7 @@ export class ModalUserDeleteComponent implements OnInit {
 export class ModalUserDetailComponent implements OnInit {
   title: string;
   user: User;
-  userForEdit: User;
+  model: User;
   users: User[];
 
   constructor(
@@ -127,7 +127,7 @@ export class ModalUserDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userForEdit = Object.assign({}, this.user);
+    this.model = Object.assign({}, this.user);
   }
 
   deleteUser(id: number) {
@@ -140,12 +140,12 @@ export class ModalUserDetailComponent implements OnInit {
   }
 
   saveChanges() {
-    this.userService.updateUser(this.user.id, this.userForEdit).subscribe(next => {
+    this.userService.updateUser(this.user.id, this.model).subscribe(next => {
       this.alertify.success('Updated successfully');
       this.modalRef.hide();
       const index = this.users.indexOf(this.user, 0);
       if (index > -1) {
-        this.users[index] = this.userForEdit;
+        this.users[index] = this.model;
       }
     }, error => {
       this.alertify.error(error);
