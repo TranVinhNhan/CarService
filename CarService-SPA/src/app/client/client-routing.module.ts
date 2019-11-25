@@ -6,6 +6,7 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { ProductDetailResolver } from '../_resolvers/product-detail.resolver';
+import { CartComponent } from './cart/cart.component';
 
 
 const routes: Routes = [
@@ -16,7 +17,8 @@ const routes: Routes = [
             {path: '', component: HomeComponent},
             {path: 'register', component: RegisterComponent},
             {path: 'login', component: LoginComponent},
-            {path: 'products/:id', component: ProductDetailComponent, resolve: {part: ProductDetailResolver}}
+            {path: 'products/:id', component: ProductDetailComponent, resolve: {part: ProductDetailResolver}},
+            {path: 'cart', component: CartComponent}
         ]
     }
 ];

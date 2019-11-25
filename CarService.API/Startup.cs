@@ -49,6 +49,10 @@ namespace CarService.API
             services.AddTransient<Seed>();
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IGenericRepository, GenericRepository>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<IShoppingCartService>(sp => ShoppingCartService.GetCart(sp));
+            services.AddMemoryCache();
+            services.AddSession();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -95,6 +99,7 @@ namespace CarService.API
             seeder.SeedPart();
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseAuthentication();
+            app.UseSession();
             app.UseMvc();
         }
     }
