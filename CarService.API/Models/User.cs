@@ -19,7 +19,8 @@ namespace CarService.API.Models
         public string PhoneNumber { get; set; }
         public string Address { get; set; }
         public string PaymentCardNumber { get; set; }
-     
+
         public ICollection<CarReceipt> CarReceipts { get; set; }
+        public ICollection<ProductOrder> ProductOrders { get; set; }
     }
 }

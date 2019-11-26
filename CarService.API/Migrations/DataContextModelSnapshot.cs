@@ -126,6 +126,58 @@ namespace CarService.API.Migrations
                     b.ToTable("Photos");
                 });
 
+            modelBuilder.Entity("CarService.API.Models.ProductOrder", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Address");
+
+                    b.Property<string>("AddressOptional");
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("LastName");
+
+                    b.Property<DateTime>("OrderPlacedTime");
+
+                    b.Property<double>("OrderTotal");
+
+                    b.Property<string>("PhoneNumber");
+
+                    b.Property<string>("Status");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ProductOrders");
+                });
+
+            modelBuilder.Entity("CarService.API.Models.ProductOrderDetail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.Property<double>("Price");
+
+                    b.Property<int>("ProductOrderId");
+
+                    b.Property<int>("Quantity");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductOrderId");
+
+                    b.ToTable("ProductOrderDetails");
+                });
+
             modelBuilder.Entity("CarService.API.Models.RepairReceipt", b =>
                 {
                     b.Property<int>("Id")
@@ -282,6 +334,22 @@ namespace CarService.API.Migrations
                     b.HasOne("CarService.API.Models.AutomotivePart", "AutomotivePart")
                         .WithMany("Photos")
                         .HasForeignKey("AutomotivePartId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("CarService.API.Models.ProductOrder", b =>
+                {
+                    b.HasOne("CarService.API.Models.User", "User")
+                        .WithMany("ProductOrders")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("CarService.API.Models.ProductOrderDetail", b =>
+                {
+                    b.HasOne("CarService.API.Models.ProductOrder", "ProductOrder")
+                        .WithMany("ProductOrderDetails")
+                        .HasForeignKey("ProductOrderId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

@@ -14,6 +14,8 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { ProductDetailResolver } from '../_resolvers/product-detail.resolver';
 import { CartComponent } from './cart/cart.component';
 import { ShoppingCartService } from '../_services/shopping-cart.service';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { ProductOrderService } from '../_services/product-order.service';
 
 @NgModule({
   imports: [
@@ -30,12 +32,14 @@ import { ShoppingCartService } from '../_services/shopping-cart.service';
     RegisterComponent,
     LoginComponent,
     ProductDetailComponent,
-    CartComponent
+    CartComponent,
+    CheckoutComponent
   ],
   providers: [
     AutopartService,
     ProductDetailResolver,
-    ShoppingCartService
+    ShoppingCartService,
+    ProductOrderService
   ]
 })
 export class ClientModule { }

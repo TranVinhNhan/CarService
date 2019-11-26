@@ -26,11 +26,13 @@ export class ProductDetailComponent implements OnInit {
     });
   }
 
-  addToCart(id: number, price: number) {
-    if (id) {
+  addToCart(part: AutoPart) {
+    if (part) {
       const cartItem: ShoppingCartItem = {
-        id,
-        price,
+        id: part.id,
+        name: part.name,
+        price: part.currentPrice,
+        photoUrl: part.photos[0].url,
         quantity: 1
       };
 
@@ -45,7 +47,7 @@ export class ProductDetailComponent implements OnInit {
         let index = -1;
         for (let i = 0; i < cartItemsJson.length; i++) {
           const item = JSON.parse(cartItemsJson[i]);
-          if (item.id === id) {
+          if (item.id === cartItem.id) {
             index = i;
             break;
           }
@@ -77,8 +79,6 @@ export class ProductDetailComponent implements OnInit {
       const item: ShoppingCartItem = JSON.parse(this.shoppingcartService.cartItemsJson[i]);
       sum += item.quantity * item.price;
     }
-    // this.shoppingcartService.itemCount = this.shoppingcartService.cartItemsJson.length;
     this.shoppingcartService.changeItemCount(JSON.parse(localStorage.getItem('cart')).length);
-    this.shoppingcartService.total = sum;
   }
 }

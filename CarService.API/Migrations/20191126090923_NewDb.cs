@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CarService.API.Migrations
 {
-    public partial class AddShoppingCart : Migration
+    public partial class NewDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -128,6 +128,34 @@ namespace CarService.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ProductOrders",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    OrderPlacedTime = table.Column<DateTime>(nullable: false),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    PhoneNumber = table.Column<string>(nullable: true),
+                    Address = table.Column<string>(nullable: true),
+                    AddressOptional = table.Column<string>(nullable: true),
+                    Status = table.Column<string>(nullable: true),
+                    OrderTotal = table.Column<double>(nullable: false),
+                    UserId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductOrders", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProductOrders_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Photos",
                 columns: table => new
                 {
@@ -214,6 +242,28 @@ namespace CarService.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ProductOrderDetails",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(nullable: true),
+                    Quantity = table.Column<int>(nullable: false),
+                    Price = table.Column<double>(nullable: false),
+                    ProductOrderId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductOrderDetails", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProductOrderDetails_ProductOrders_ProductOrderId",
+                        column: x => x.ProductOrderId,
+                        principalTable: "ProductOrders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AutomotivePartRepairReceipt",
                 columns: table => new
                 {
@@ -276,6 +326,16 @@ namespace CarService.API.Migrations
                 column: "AutomotivePartId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ProductOrderDetails_ProductOrderId",
+                table: "ProductOrderDetails",
+                column: "ProductOrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductOrders_UserId",
+                table: "ProductOrders",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_RepairReceipt_CarReceiptId",
                 table: "RepairReceipt",
                 column: "CarReceiptId",
@@ -299,6 +359,9 @@ namespace CarService.API.Migrations
                 name: "Photos");
 
             migrationBuilder.DropTable(
+                name: "ProductOrderDetails");
+
+            migrationBuilder.DropTable(
                 name: "ShoppingCartItems");
 
             migrationBuilder.DropTable(
@@ -306,6 +369,9 @@ namespace CarService.API.Migrations
 
             migrationBuilder.DropTable(
                 name: "Services");
+
+            migrationBuilder.DropTable(
+                name: "ProductOrders");
 
             migrationBuilder.DropTable(
                 name: "AutomotiveParts");

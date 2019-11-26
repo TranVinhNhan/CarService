@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from './_services/auth.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ShoppingCartService } from './_services/shopping-cart.service';
-import { ShoppingCart } from './_models/shoppingcartdto';
 import { AlertifyService } from './_services/alertify.service';
 
 @Component({

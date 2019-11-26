@@ -15,18 +15,18 @@
     "CarReceipts": []
   },
   {
-    "Username": "Arnold",
-    "Role": "User",
-    "Firstname": "Arnold",
-    "Lastname": "Hahn",
+    "Username": "Anonymous",
+    "Role": "Anonymous",
+    "Firstname": "Anonymous",
+    "Lastname": "User",
     "Gender": "Male",
     "Password": "password",
     "Created": "2017-08-12",
     "LastActive": "2017-08-12",
-    "Address": "628 Bristol Street, Westmoreland, Wyoming, 893",
-    "Email": "arnoldhahn@emergent.com",
-    "PhoneNumber": "+84 (973) 518-2592",
-    "PaymentCardNumber": "(923) 421-3160",
+    "Address": "",
+    "Email": "",
+    "PhoneNumber": "",
+    "PaymentCardNumber": "",
     "CarReceipts": []
   },
   {

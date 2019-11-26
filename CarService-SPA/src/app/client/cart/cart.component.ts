@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ShoppingCart } from 'src/app/_models/shoppingcartdto';
-import { ShoppingCartService } from 'src/app/_services/shopping-cart.service';
+import { AutopartService } from 'src/app/_services/autopart.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
+
 
 @Component({
   selector: 'app-cart',
@@ -10,11 +10,22 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 })
 export class CartComponent implements OnInit {
 
+  cartItems: any = [];
+  total: number;
+
   constructor(
+    private alertify: AlertifyService
   ) { }
 
   ngOnInit() {
-
+    let sum = 0;
+    const cartItemsJson = JSON.parse(localStorage.getItem('cart'));
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < cartItemsJson.length; i++) {
+      const item = JSON.parse(cartItemsJson[i]);
+      this.cartItems.push(item);
+      sum += item.price * item.quantity;
+    }
+    this.total = sum;
   }
-
 }

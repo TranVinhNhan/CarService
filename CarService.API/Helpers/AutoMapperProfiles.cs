@@ -27,6 +27,9 @@ namespace CarService.API.Helpers
 
             CreateMap<SupplierForCreationDto, Supplier>();
             CreateMap<SupplierForUpdateDto, Supplier>();
+
+            CreateMap<ProductOrderDetailForCreationDto, ProductOrderDetail>();
+            CreateMap<ProductOrderForCreationDto, ProductOrder>();
         }
     }
 }

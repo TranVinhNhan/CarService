@@ -63,7 +63,7 @@
                                             <td>
                                                 <span *ngIf="(user.role==='Admin')"
                                                     class="role admin">{{user.role}}</span>
-                                                <span *ngIf="(user.role==='Staff')"
+                                                <span *ngIf="(user.role==='Staff' || user.role ==='Anonymous')"
                                                     class="role member">{{user.role}}</span>
                                                 <span *ngIf="(user.role==='User')"
                                                     class="role user">{{user.role}}</span>
@@ -74,14 +74,18 @@
                                             <td>
                                                 <h6>{{user.phoneNumber}}</h6>
                                             </td>
-                                            <td>
+                                            <td *ngIf="user.role !=='Anonymous'">
                                                 <span class="more">
                                                     <i class="zmdi zmdi-account-box"
                                                         (click)="openModalWithDetailComponent(user)"></i>
                                                 </span>
                                                 <span class="more">
-                                                    <i class="zmdi zmdi-delete" (click)="openModalWithDeleteComponent(user)"></i>
+                                                    <i class="zmdi zmdi-delete"
+                                                        (click)="openModalWithDeleteComponent(user)"></i>
                                                 </span>
+                                            </td>
+                                            <td *ngIf="user.role ==='Anonymous'">
+                                                <p>Cannot take action</p>
                                             </td>
                                         </tr>
                                     </tbody>
