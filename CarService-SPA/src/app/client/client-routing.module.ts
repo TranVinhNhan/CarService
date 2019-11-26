@@ -8,6 +8,7 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { ProductDetailResolver } from '../_resolvers/product-detail.resolver';
 import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { MyOrdersComponent } from './my-orders/my-orders.component';
 
 
 const routes: Routes = [
@@ -20,7 +21,8 @@ const routes: Routes = [
             {path: 'login', component: LoginComponent},
             {path: 'products/:id', component: ProductDetailComponent, resolve: {part: ProductDetailResolver}},
             {path: 'cart', component: CartComponent},
-            {path: 'checkout', component: CheckoutComponent}
+            {path: 'checkout', component: CheckoutComponent},
+            {path: 'myorders', component: MyOrdersComponent}
         ]
     }
 ];

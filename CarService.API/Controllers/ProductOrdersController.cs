@@ -1,13 +1,16 @@
 using System;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using CarService.API.Dtos;
 using CarService.API.Models;
 using CarService.API.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarService.API.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductOrdersController : ControllerBase
@@ -20,6 +23,7 @@ namespace CarService.API.Controllers
             _repo = repo;
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> AddProductOrder(OrderDto orderDto)
         {
@@ -52,6 +56,36 @@ namespace CarService.API.Controllers
             }
 
             else return BadRequest();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetOrders()
+        {
+            var orders = await _repo.GetOrders();
+
+            return Ok(orders);
+        }
+
+        [AllowAnonymous]
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> GetOrderByUser(int userId)
+        {
+            // if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            // {
+            //     return Unauthorized();
+            // }
+            if (userId == 2)
+            {
+                return Unauthorized();
+            }
+
+            var userFromRepo = await _repo.GetUser(userId);
+            if (userFromRepo == null)
+            {
+                return BadRequest();
+            }
+
+            return Ok(userFromRepo.ProductOrders);
         }
     }
 }

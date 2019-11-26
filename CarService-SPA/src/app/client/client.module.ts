@@ -16,6 +16,7 @@ import { CartComponent } from './cart/cart.component';
 import { ShoppingCartService } from '../_services/shopping-cart.service';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ProductOrderService } from '../_services/product-order.service';
+import { MyOrdersComponent } from './my-orders/my-orders.component';
 
 @NgModule({
   imports: [
@@ -33,7 +34,8 @@ import { ProductOrderService } from '../_services/product-order.service';
     LoginComponent,
     ProductDetailComponent,
     CartComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    MyOrdersComponent
   ],
   providers: [
     AutopartService,

@@ -1,5 +1,6 @@
 <!-- Title Page -->
-<section class="bg-title-page p-t-40 p-b-50 flex-col-c-m" style="background-image: url(../../../../../assets/client/images/banner-00.jpg);">
+<section class="bg-title-page p-t-40 p-b-50 flex-col-c-m"
+  style="background-image: url(../../../../../assets/client/images/banner-00.jpg);">
   <h2 class="l-text2 t-center">
     Cart
   </h2>
@@ -7,7 +8,7 @@
 
 <!-- Cart -->
 <section class="cart bgwhite p-t-70 p-b-100">
-  <div class="container">
+  <div class="container" *ngIf="cartItems.length">
     <!-- Cart item -->
     <div class="container-table-cart pos-relative">
       <div class="wrap-table-shopping-cart bgwhite">
@@ -16,7 +17,7 @@
             <th class="column-1"></th>
             <th class="column-2">Product</th>
             <th class="column-3">Price</th>
-            <th class="column-4 p-l-70">Quantity</th>
+            <th class="column-4 p-l-125">Quantity</th>
             <th class="column-5">Total</th>
           </tr>
 
@@ -28,15 +29,16 @@
             </td>
             <td class="column-2">{{cartItem.name}}</td>
             <td class="column-3">${{cartItem.price}}</td>
-            <td class="column-4">
+            <td align="center" class="column-4">
               <div class="flex-w bo5 of-hidden w-size17">
-                <button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
+                <button (click)="minusQty(cartItem.id)" class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
                   <i class="fs-12 fa fa-minus" aria-hidden="true"></i>
                 </button>
 
-                <input class="size8 m-text18 t-center num-product" type="number" name="num-product1" value="1">
+                <input disabled class="size8 m-text18 t-center num-product" type="number" name="num-product1"
+                  value="{{cartItem.quantity}}">
 
-                <button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
+                <button (click)="addQty(cartItem.id)" class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
                   <i class="fs-12 fa fa-plus" aria-hidden="true"></i>
                 </button>
               </div>
@@ -63,8 +65,8 @@
 
       <div class="size10 trans-0-4 m-t-10 m-b-10">
         <!-- Button -->
-        <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
-          Update Cart
+        <button (click)="clearCart()" class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
+          Clear Cart
         </button>
       </div>
     </div>
@@ -94,36 +96,9 @@
 
         <div class="w-size20 w-full-sm">
           <p class="s-text8 p-b-23">
-            There are no shipping methods available. Please double check your address, or contact us if you need any help.
+            There are no shipping methods available. Please double check your address, or contact us if you need any
+            help.
           </p>
-
-          <span class="s-text19">
-            Calculate Shipping
-          </span>
-
-          <div class="rs2-select2 rs3-select2 rs4-select2 bo4 of-hidden w-size21 m-t-8 m-b-12">
-            <select class="selection-2" name="country">
-              <option>Select a country...</option>
-              <option>US</option>
-              <option>UK</option>
-              <option>Japan</option>
-            </select>
-          </div>
-
-          <div class="size13 bo4 m-b-12">
-          <input class="sizefull s-text7 p-l-15 p-r-15" type="text" name="state" placeholder="State /  country">
-          </div>
-
-          <div class="size13 bo4 m-b-22">
-            <input class="sizefull s-text7 p-l-15 p-r-15" type="text" name="postcode" placeholder="Postcode / Zip">
-          </div>
-
-          <div class="size14 trans-0-4 m-b-10">
-            <!-- Button -->
-            <button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
-              Update Totals
-            </button>
-          </div>
         </div>
       </div>
 
@@ -145,5 +120,8 @@
         </button>
       </div>
     </div>
+  </div>
+  <div class="container" *ngIf="!cartItems.length">
+    <h2 class="text-center">Oops, Your cart is Empty</h2>
   </div>
 </section>

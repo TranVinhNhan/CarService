@@ -38,9 +38,9 @@ namespace CarService.API
         {
             services.AddDbContext<DataContext>(x =>
                  x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
-            // services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
-            .AddJsonOptions(opt => {
+            .AddJsonOptions(opt =>
+            {
                 opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
             services.AddCors();
@@ -60,7 +60,7 @@ namespace CarService.API
                     {
                         ValidateIssuerSigningKey = true,
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII
-                            .GetBytes(Configuration.GetSection("AppSetting:Token").Value)),
+                            .GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
                         ValidateIssuer = false,
                         ValidateAudience = false
                     };
@@ -76,11 +76,13 @@ namespace CarService.API
             }
             else
             {
-                app.UseExceptionHandler(builder => {
-                    builder.Run(async context => {
+                app.UseExceptionHandler(builder =>
+                {
+                    builder.Run(async context =>
+                    {
                         context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                         var error = context.Features.Get<IExceptionHandlerFeature>();
-                        if(error != null)
+                        if (error != null)
                         {
                             context.Response.AddApplicationError(error.Error.Message);
                             await context.Response.WriteAsync(error.Error.Message);
@@ -97,7 +99,8 @@ namespace CarService.API
             seeder.SeedSupplier();
             seeder.SeedService();
             seeder.SeedPart();
-            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            app.UseCors(x => x.WithOrigins("http://localhost:4200")
+                .AllowAnyHeader().AllowAnyMethod().AllowCredentials());
             app.UseAuthentication();
             app.UseSession();
             app.UseMvc();

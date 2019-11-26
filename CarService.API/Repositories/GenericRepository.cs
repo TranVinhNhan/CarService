@@ -31,7 +31,7 @@ namespace CarService.API.Repositories
 
         public async Task<User> GetUser(int id)
         {
-            var user = await _context.Users.Include(c => c.CarReceipts).FirstOrDefaultAsync(u => u.Id == id);
+            var user = await _context.Users.Include(c => c.CarReceipts).Include(u => u.ProductOrders).ThenInclude(p => p.ProductOrderDetails).FirstOrDefaultAsync(u => u.Id == id);
 
             return user;
         }
@@ -120,6 +120,20 @@ namespace CarService.API.Repositories
                 .FirstOrDefaultAsync(s => s.Id == id);
 
             return service;
+        }
+
+        public async Task<IEnumerable<ProductOrder>> GetOrders()
+        {
+            var orders = await _context.ProductOrders.Include(o => o.User).Include(o => o.ProductOrderDetails).ToListAsync();
+
+            return orders;
+        }
+
+        public async Task<ProductOrder> GetOrderByUser(int userId)
+        {
+            var order = await _context.ProductOrders.Include(o => o.User).Include(o => o.ProductOrderDetails).FirstOrDefaultAsync(o => o.User.Id == userId);
+
+            return order;
         }
     }
 }

@@ -34,5 +34,9 @@ namespace CarService.API.Repositories
 
          // Photo
          Task<Photo> GetPhoto(int id);
+
+         // Order
+         Task<IEnumerable<ProductOrder>> GetOrders();
+         Task<ProductOrder> GetOrderByUser(int userId);
     }
 }
