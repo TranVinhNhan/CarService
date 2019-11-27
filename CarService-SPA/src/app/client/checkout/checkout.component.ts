@@ -76,7 +76,7 @@ export class CheckoutComponent implements OnInit {
         this.alertify.success('Checkout completed');
         localStorage.removeItem('cart');
         this.shoppingcartService.changeItemCount(0);
-        this.router.navigate(['/']);
+        this.router.navigate(['/myorders']);
       }, error => {
         this.alertify.error('error');
       });

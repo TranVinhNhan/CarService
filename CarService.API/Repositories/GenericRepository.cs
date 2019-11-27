@@ -135,5 +135,12 @@ namespace CarService.API.Repositories
 
             return order;
         }
+
+        public async Task<ProductOrder> GetOrderById(int orderId)
+        {
+            var order = await _context.ProductOrders.Include(o => o.User).Include(o => o.ProductOrderDetails).FirstOrDefaultAsync(o => o.Id == orderId);
+
+            return order;
+        }
     }
 }

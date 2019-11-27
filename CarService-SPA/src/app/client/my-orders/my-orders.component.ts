@@ -34,4 +34,16 @@ export class MyOrdersComponent implements OnInit {
       this.alertify.error('Error');
     }
   }
+
+  cancelOrderFromUser(order: ProductOrder) {
+    this.productorderService.cancelOrderFromUser(this.authService.decodedToken.nameid, order.id).subscribe(next => {
+      this.alertify.success('Order cancelled');
+      const index = this.myOrders.indexOf(order, 0);
+      if (index > -1) {
+        this.myOrders[index].status = 'Cancelled';
+      }
+    }, error => {
+      this.alertify.error(error);
+    });
+  }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -86,6 +87,58 @@ namespace CarService.API.Controllers
             }
 
             return Ok(userFromRepo.ProductOrders);
+        }
+
+        [AllowAnonymous]
+        [HttpDelete("{userId}/delete/{orderId}")]
+        public async Task<IActionResult> DeleteOrderFromUser(int userId, int orderId)
+        {
+            if (userId == 2)
+            {
+                return Unauthorized();
+            }
+
+            var userFromRepo = await _repo.GetUser(userId);
+            if (!userFromRepo.ProductOrders.Any(p => p.Id == orderId))
+                return BadRequest("Order does not exist");
+
+            var orderFromUser = await _repo.GetOrderById(orderId);
+
+            _repo.Delete(orderFromUser);
+
+            if (await _repo.SaveAll())
+                return Ok();
+
+            return BadRequest("Delete order failed");
+        }
+
+        [AllowAnonymous]
+        [HttpDelete("{userId}/cancel/{orderId}")]
+        public async Task<IActionResult> CancelOrderFromUser(int userId, int orderId)
+        {
+            if (userId == 2)
+            {
+                return Unauthorized();
+            }
+
+            var userFromRepo = await _repo.GetUser(userId);
+            if (!userFromRepo.ProductOrders.Any(p => p.Id == orderId))
+                return BadRequest("Order does not exist");
+
+            var orderFromUser = await _repo.GetOrderById(orderId);
+
+            if (orderFromUser.OrderPlacedTime.AddHours(2) < DateTime.Now)
+                return BadRequest("Cannot cancel order after 2 hours");
+
+            if (orderFromUser.Status != "Pending")
+                return BadRequest("Cannot cancel becuase your order is being packaging and delivering");
+
+            orderFromUser.Status = "Cancelled";
+
+            if (await _repo.SaveAll())
+                return NoContent();
+
+            return BadRequest("Cancel order failed");
         }
     }
 }

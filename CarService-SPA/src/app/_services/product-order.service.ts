@@ -25,4 +25,12 @@ export class ProductOrderService {
   getOrdersByUser(id: number): Observable<ProductOrder[]> {
     return this.http.get<ProductOrder[]>(this.baseUrl + 'productorders/' + id);
   }
+
+  deleteOrderFromUser(userId: number, orderId: number) {
+    return this.http.delete(this.baseUrl + 'productorders/' + userId + '/delete/' + orderId);
+  }
+
+  cancelOrderFromUser(userId: number, orderId: number) {
+    return this.http.delete(this.baseUrl + 'productorders/' + userId + '/cancel/' + orderId);
+  }
 }

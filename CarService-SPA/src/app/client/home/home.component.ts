@@ -13,6 +13,7 @@ import { ShoppingCartItem } from 'src/app/_models/shoppingcartitem';
 export class HomeComponent implements OnInit {
 
   parts: AutoPart[];
+  allParts: AutoPart[];
   constructor(
     private autopartService: AutopartService,
     private alertify: AlertifyService,
@@ -22,6 +23,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.autopartService.getParts().subscribe((parts: AutoPart[]) => {
       this.parts = parts;
+      this.allParts = parts;
     }, error => {
       this.alertify.error(error);
     });
@@ -81,5 +83,18 @@ export class HomeComponent implements OnInit {
       sum += item.quantity * item.price;
     }
     this.shoppingcartService.changeItemCount(JSON.parse(localStorage.getItem('cart')).length);
+  }
+
+  filter(type: string) {
+    if (type !== 'all') {
+      this.parts = this.allParts;
+      const filterParam = type;
+      const partFilterList = this.parts.filter((part: AutoPart) => part.automotivePartType.typeName === filterParam);
+      this.parts = partFilterList;
+    }
+
+    if (type === 'all') {
+      this.parts = this.allParts;
+    }
   }
 }
