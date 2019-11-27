@@ -60,7 +60,7 @@ namespace CarService.API
                     {
                         ValidateIssuerSigningKey = true,
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII
-                            .GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
+                            .GetBytes(Configuration.GetSection("AppSetting:Token").Value)),
                         ValidateIssuer = false,
                         ValidateAudience = false
                     };
@@ -99,8 +99,7 @@ namespace CarService.API
             seeder.SeedSupplier();
             seeder.SeedService();
             seeder.SeedPart();
-            app.UseCors(x => x.WithOrigins("http://localhost:4200")
-                .AllowAnyHeader().AllowAnyMethod().AllowCredentials());
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             app.UseAuthentication();
             app.UseSession();
             app.UseMvc();
