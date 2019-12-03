@@ -22,7 +22,13 @@ import {
 import { AutotypeService } from '../_services/autotype.service';
 import { SupplierService } from '../_services/supplier.service';
 import { AutopartService } from '../_services/autopart.service';
-import { ServicesComponent, ModalServiceDeleteComponent, ModalServiceDetailComponent } from './dashboard/services/services.component';
+import {
+  ServicesComponent,
+  ModalServiceDeleteComponent,
+  ModalServiceDetailComponent,
+  ModalServiceImageComponent,
+  ModalServicePhotoDetailComponent
+} from './dashboard/services/services.component';
 import { ServicesService } from '../_services/services.service';
 import { AutomotiveEditorComponent } from './dashboard/automotives/automotive-editor/automotive-editor.component';
 import { TypesComponent, ModalTypeDeleteComponent, ModalTypeDetailComponent } from './dashboard/automotives/types/types.component';
@@ -72,12 +78,14 @@ import { ProductOrderService } from '../_services/product-order.service';
     ModalPartImageComponent,
     ModalPartDetailComponent,
     ModalPhotoDetailComponent,
-    ModalServiceDeleteComponent,
-    ModalServiceDetailComponent,
     ModalTypeDeleteComponent,
     ModalTypeDetailComponent,
     ModalSupplierDeleteComponent,
-    ModalSupplierDetailComponent
+    ModalSupplierDetailComponent,
+    ModalServiceImageComponent,
+    ModalServiceDeleteComponent,
+    ModalServiceDetailComponent,
+    ModalServicePhotoDetailComponent
   ],
   providers: [
     UserService,
@@ -96,6 +104,8 @@ import { ProductOrderService } from '../_services/product-order.service';
     ModalPhotoDetailComponent,
     ModalServiceDeleteComponent,
     ModalServiceDetailComponent,
+    ModalServiceImageComponent,
+    ModalServicePhotoDetailComponent,
     ModalTypeDeleteComponent,
     ModalTypeDetailComponent,
     ModalSupplierDeleteComponent,

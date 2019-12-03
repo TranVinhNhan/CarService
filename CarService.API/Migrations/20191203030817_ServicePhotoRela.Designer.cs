@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarService.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20191126090923_NewDb")]
-    partial class NewDb
+    [Migration("20191203030817_ServicePhotoRela")]
+    partial class ServicePhotoRela
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -88,26 +88,19 @@ namespace CarService.API.Migrations
 
                     b.Property<string>("LicensePlateNumber");
 
+                    b.Property<int>("RepairReceiptId");
+
+                    b.Property<int>("ServiceId");
+
                     b.Property<int>("UserId");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ServiceId");
+
                     b.HasIndex("UserId");
 
                     b.ToTable("CarReceipts");
-                });
-
-            modelBuilder.Entity("CarService.API.Models.CarReceiptService", b =>
-                {
-                    b.Property<int>("CarReceiptId");
-
-                    b.Property<int>("ServiceId");
-
-                    b.HasKey("CarReceiptId", "ServiceId");
-
-                    b.HasIndex("ServiceId");
-
-                    b.ToTable("CarReceiptService");
                 });
 
             modelBuilder.Entity("CarService.API.Models.Photo", b =>
@@ -115,15 +108,20 @@ namespace CarService.API.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("AutomotivePartId");
+                    b.Property<int?>("AutomotivePartId");
 
                     b.Property<string>("PublicId");
+
+                    b.Property<int?>("ServiceId");
 
                     b.Property<string>("Url");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AutomotivePartId");
+
+                    b.HasIndex("ServiceId")
+                        .IsUnique();
 
                     b.ToTable("Photos");
                 });
@@ -207,6 +205,8 @@ namespace CarService.API.Migrations
                     b.Property<string>("Description");
 
                     b.Property<string>("Name");
+
+                    b.Property<int>("PhotoId");
 
                     b.Property<double>("Price");
 
@@ -312,22 +312,14 @@ namespace CarService.API.Migrations
 
             modelBuilder.Entity("CarService.API.Models.CarReceipt", b =>
                 {
+                    b.HasOne("CarService.API.Models.Service", "Service")
+                        .WithMany("CarReceipts")
+                        .HasForeignKey("ServiceId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("CarService.API.Models.User", "User")
                         .WithMany("CarReceipts")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("CarService.API.Models.CarReceiptService", b =>
-                {
-                    b.HasOne("CarService.API.Models.CarReceipt", "CarReceipt")
-                        .WithMany("CarReceiptServices")
-                        .HasForeignKey("CarReceiptId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("CarService.API.Models.Service", "Service")
-                        .WithMany("CarReceiptServices")
-                        .HasForeignKey("ServiceId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -335,8 +327,11 @@ namespace CarService.API.Migrations
                 {
                     b.HasOne("CarService.API.Models.AutomotivePart", "AutomotivePart")
                         .WithMany("Photos")
-                        .HasForeignKey("AutomotivePartId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("AutomotivePartId");
+
+                    b.HasOne("CarService.API.Models.Service", "Service")
+                        .WithOne("Photo")
+                        .HasForeignKey("CarService.API.Models.Photo", "ServiceId");
                 });
 
             modelBuilder.Entity("CarService.API.Models.ProductOrder", b =>

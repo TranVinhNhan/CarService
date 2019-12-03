@@ -38,4 +38,8 @@ export class ServicesService {
   updateService(id: number, model: any) {
     return this.http.put(this.baseUrl + 'services/' + id, model);
   }
+
+  deletePhoto(serviceId: number, id: number) {
+    return this.http.delete(this.baseUrl + 'services/' + serviceId + '/photos/' + id);
+  }
 }

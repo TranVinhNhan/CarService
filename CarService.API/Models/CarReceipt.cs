@@ -13,9 +13,9 @@ namespace CarService.API.Models
 
         public User User { get; set; }
         public int UserId { get; set; }
-
-        public ICollection<CarReceiptService> CarReceiptServices { get; set; }
-
+        public Service Service { get; set; }
+        public int ServiceId { get; set; }
         public RepairReceipt RepairReceipt { get; set; }
+        public int RepairReceiptId { get; set; }
     }
 }

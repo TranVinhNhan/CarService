@@ -14,7 +14,6 @@ namespace CarService.API.Data
         public DbSet<CarReceipt> CarReceipts { get; set; }
         public DbSet<Photo> Photos { get; set; }
         public DbSet<Service> Services { get; set; }
-        public DbSet<CarReceiptService> CarReceiptService { get; set; }
         public DbSet<RepairReceipt> RepairReceipt { get; set; }
         public DbSet<AutomotivePartRepairReceipt> AutomotivePartRepairReceipt { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
@@ -25,8 +24,16 @@ namespace CarService.API.Data
         {
             modelBuilder.Entity<AutomotivePartRepairReceipt>()
                 .HasKey(c => new { c.AutomotivePartId, c.RepairReceiptId });
-            modelBuilder.Entity<CarReceiptService>()
-                .HasKey(c => new { c.CarReceiptId, c.ServiceId });
+
+            modelBuilder.Entity<CarReceipt>()
+            .HasOne(c => c.RepairReceipt)
+            .WithOne(r => r.CarReceipt)
+            .HasForeignKey<RepairReceipt>(r => r.CarReceiptId);
+
+            modelBuilder.Entity<Service>()
+            .HasOne(s => s.Photo)
+            .WithOne(p => p.Service)
+            .HasForeignKey<Photo>(p => p.ServiceId);
         }
     }
 }

@@ -59,6 +59,7 @@
                     <th>name</th>
                     <th>description</th>
                     <th>price</th>
+                    <th>photo</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -74,13 +75,21 @@
                     <td>{{service.description}}</td>
                     <td>{{service.price}}</td>
                     <td>
+                      <img style="cursor: pointer;" (click)="openModalWithDeletePhotoComponent(service, service.photo)"
+                        src="{{service.photo?.url}}" class="img-thumbnail p-1" style="height: 50px;" alt="">
+                    </td>
+                    <td>
                       <div class="table-data-feature">
+                        <button class="item" data-toggle="tooltip" data-placement="top" title="Image"
+                          (click)="openModalWithImageComponent(service)">
+                          <i class="zmdi zmdi-collection-image"></i>
+                        </button>
                         <button class="item" data-toggle="tooltip" data-placement="top" title="Edit"
-                        (click)="openModalWithDetailComponent(service)">
+                          (click)="openModalWithDetailComponent(service)">
                           <i class="zmdi zmdi-edit"></i>
                         </button>
                         <button class="item" data-toggle="tooltip" data-placement="top" title="Delete"
-                        (click)="openModalWithDeleteComponent(service)">
+                          (click)="openModalWithDeleteComponent(service)">
                           <i class="zmdi zmdi-delete"></i>
                         </button>
                         <button class="item" data-toggle="tooltip" data-placement="top" title="More">

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CarService.API.Migrations
 {
-    public partial class NewDb : Migration
+    public partial class ServicePhotoRela : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,7 +28,8 @@ namespace CarService.API.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
-                    Price = table.Column<double>(nullable: false)
+                    Price = table.Column<double>(nullable: false),
+                    PhotoId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -114,11 +115,19 @@ namespace CarService.API.Migrations
                     CarModel = table.Column<string>(nullable: true),
                     Brand = table.Column<string>(nullable: true),
                     DayReceived = table.Column<DateTime>(nullable: false),
-                    UserId = table.Column<int>(nullable: false)
+                    UserId = table.Column<int>(nullable: false),
+                    ServiceId = table.Column<int>(nullable: false),
+                    RepairReceiptId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CarReceipts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CarReceipts_Services_ServiceId",
+                        column: x => x.ServiceId,
+                        principalTable: "Services",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_CarReceipts_Users_UserId",
                         column: x => x.UserId,
@@ -163,7 +172,8 @@ namespace CarService.API.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Url = table.Column<string>(nullable: true),
                     PublicId = table.Column<string>(nullable: true),
-                    AutomotivePartId = table.Column<int>(nullable: false)
+                    AutomotivePartId = table.Column<int>(nullable: true),
+                    ServiceId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -173,7 +183,13 @@ namespace CarService.API.Migrations
                         column: x => x.AutomotivePartId,
                         principalTable: "AutomotiveParts",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Photos_Services_ServiceId",
+                        column: x => x.ServiceId,
+                        principalTable: "Services",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -192,30 +208,6 @@ namespace CarService.API.Migrations
                         name: "FK_ShoppingCartItems_AutomotiveParts_AutomotivePartId",
                         column: x => x.AutomotivePartId,
                         principalTable: "AutomotiveParts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CarReceiptService",
-                columns: table => new
-                {
-                    CarReceiptId = table.Column<int>(nullable: false),
-                    ServiceId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CarReceiptService", x => new { x.CarReceiptId, x.ServiceId });
-                    table.ForeignKey(
-                        name: "FK_CarReceiptService_CarReceipts_CarReceiptId",
-                        column: x => x.CarReceiptId,
-                        principalTable: "CarReceipts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CarReceiptService_Services_ServiceId",
-                        column: x => x.ServiceId,
-                        principalTable: "Services",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -311,19 +303,25 @@ namespace CarService.API.Migrations
                 column: "SupplierId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CarReceipts_ServiceId",
+                table: "CarReceipts",
+                column: "ServiceId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_CarReceipts_UserId",
                 table: "CarReceipts",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CarReceiptService_ServiceId",
-                table: "CarReceiptService",
-                column: "ServiceId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Photos_AutomotivePartId",
                 table: "Photos",
                 column: "AutomotivePartId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Photos_ServiceId",
+                table: "Photos",
+                column: "ServiceId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductOrderDetails_ProductOrderId",
@@ -353,9 +351,6 @@ namespace CarService.API.Migrations
                 name: "AutomotivePartRepairReceipt");
 
             migrationBuilder.DropTable(
-                name: "CarReceiptService");
-
-            migrationBuilder.DropTable(
                 name: "Photos");
 
             migrationBuilder.DropTable(
@@ -366,9 +361,6 @@ namespace CarService.API.Migrations
 
             migrationBuilder.DropTable(
                 name: "RepairReceipt");
-
-            migrationBuilder.DropTable(
-                name: "Services");
 
             migrationBuilder.DropTable(
                 name: "ProductOrders");
@@ -384,6 +376,9 @@ namespace CarService.API.Migrations
 
             migrationBuilder.DropTable(
                 name: "Suppliers");
+
+            migrationBuilder.DropTable(
+                name: "Services");
 
             migrationBuilder.DropTable(
                 name: "Users");

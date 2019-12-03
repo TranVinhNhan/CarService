@@ -14,16 +14,16 @@ using Microsoft.Extensions.Options;
 namespace CarService.API.Controllers
 {
     [Authorize(Roles = "Admin")]
-    [Route("api/automotives/{automotivePartId}/photos")]
+    [Route("api/services/{serviceId}/photos")]
     [ApiController]
-    public class PhotosController : ControllerBase
+    public class ServicePhotosController : ControllerBase
     {
         private readonly IGenericRepository _repo;
         private readonly IMapper _mapper;
         private readonly IOptions<CloudinarySettings> _cloudinaryConfig;
         private Cloudinary _cloudinary;
 
-        public PhotosController(IGenericRepository repo, IMapper mapper, IOptions<CloudinarySettings> cloudinaryConfig)
+        public ServicePhotosController(IGenericRepository repo, IMapper mapper, IOptions<CloudinarySettings> cloudinaryConfig)
         {
             _cloudinaryConfig = cloudinaryConfig;
             _mapper = mapper;
@@ -38,7 +38,7 @@ namespace CarService.API.Controllers
             _cloudinary = new Cloudinary(acc);
         }
 
-        [HttpGet("{id}", Name = "GetPartPhoto")]
+        [HttpGet("{id}", Name = "GetServicePhoto")]
         public async Task<IActionResult> GetPhoto(int id)
         {
             var photoFromRepo = await _repo.GetPhoto(id);
@@ -49,9 +49,9 @@ namespace CarService.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddPhotoForAutomotive(int automotivePartId, [FromForm]PhotoForCreationDto photoForCreationDto)
+        public async Task<IActionResult> AddPhotoForAutomotive(int serviceId, [FromForm]PhotoForCreationDto photoForCreationDto)
         {
-            var partFromRepo = await _repo.GetPart(automotivePartId);
+            var serviceFromRepo = await _repo.GetService(serviceId);
 
             var file = photoForCreationDto.File;
 
@@ -64,7 +64,7 @@ namespace CarService.API.Controllers
                     var uploadParams = new ImageUploadParams()
                     {
                         File = new FileDescription(file.Name, stream),
-                        Transformation = new Transformation().Width(720).Height(960).Crop("fill")
+                        Transformation = new Transformation().Width(500).Height(500).Crop("lfill")
                     };
 
                     uploadResult = _cloudinary.Upload(uploadParams);
@@ -76,23 +76,23 @@ namespace CarService.API.Controllers
 
             var photo = _mapper.Map<Photo>(photoForCreationDto);
 
-            partFromRepo.Photos.Add(photo);
+            serviceFromRepo.Photo = photo;
 
             if (await _repo.SaveAll())
             {
                 var photoToReturn = _mapper.Map<PhotoForReturnDto>(photo);
-                return CreatedAtRoute("GetPartPhoto", new { id = photo.Id }, photoToReturn);
+                return CreatedAtRoute("GetServicePhoto", new { id = photo.Id }, photoToReturn);
             }
 
             return BadRequest("Could not add the photo");
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePhoto(int automotivePartId, int id)
+        public async Task<IActionResult> DeletePhoto(int serviceId, int id)
         {
-            var partFromRepo = await _repo.GetPart(automotivePartId);
+            var serviceFromRepo = await _repo.GetService(serviceId);
 
-            if (!partFromRepo.Photos.Any(p => p.Id == id))
+            if (serviceFromRepo.Photo.Id != id)
                 return BadRequest("Photo does not exist");
 
             var photoFromRepo = await _repo.GetPhoto(id);

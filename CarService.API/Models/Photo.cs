@@ -1,3 +1,5 @@
+using System;
+
 namespace CarService.API.Models
 {
     public class Photo
@@ -6,6 +8,8 @@ namespace CarService.API.Models
         public string Url { get; set; }
         public string PublicId { get; set; }
         public AutomotivePart AutomotivePart { get; set; }
-        public int AutomotivePartId { get; set; }
+        public Nullable<int> AutomotivePartId { get; set; }
+        public Service Service { get; set; }
+        public Nullable<int> ServiceId { get; set; }
     }
 }

@@ -3,6 +3,9 @@ import { ServicesService } from 'src/app/_services/services.service';
 import { Service } from 'src/app/_models/service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';
+import { FileUploader } from 'ng2-file-upload';
+import { environment } from 'src/environments/environment';
+import { Photo } from 'src/app/_models/photo';
 
 @Component({
   selector: 'app-services',
@@ -50,8 +53,107 @@ export class ServicesComponent implements OnInit {
     };
     this.modalRef = this.modalService.show(ModalServiceDeleteComponent, { initialState });
   }
+
+  openModalWithImageComponent(service: Service) {
+    const initialState = {
+      title: 'Image Editor',
+      service
+    };
+    this.modalRef = this.modalService.show(ModalServiceImageComponent, { initialState });
+  }
+
+  openModalWithDeletePhotoComponent(service: Service, photo: Photo) {
+    const initialState = {
+      title: 'Delete Photo',
+      service,
+      photo
+    };
+    this.modalRef = this.modalService.show(ModalServicePhotoDetailComponent, { initialState });
+  }
+}
+@Component({
+  selector: 'app-modal-serivce-image',
+  templateUrl: './_template/model-image.html',
+  styleUrls: ['./_template/modal-image.css']
+})
+export class ModalServiceImageComponent implements OnInit {
+  title: string;
+  service: Service;
+
+  uploader: FileUploader;
+  hasBaseDropZoneOver: false;
+  baseUrl = environment.apiUrl;
+
+  constructor(
+    public modalRef: BsModalRef
+  ) { }
+
+  ngOnInit() {
+    this.initializeUploader();
+  }
+
+  fileOverBase(e: any): void {
+    this.hasBaseDropZoneOver = e;
+  }
+
+  initializeUploader() {
+    this.uploader = new FileUploader({
+      url: this.baseUrl + 'services/' + this.service.id + '/photos',
+      authToken: 'Bearer ' + localStorage.getItem('token'),
+      isHTML5: true,
+      allowedFileType: ['image'],
+      removeAfterUpload: true,
+      autoUpload: false,
+      maxFileSize: 10 * 1024 * 1024
+    });
+
+    this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; };
+    this.uploader.onSuccessItem = (item, response, status, headers) => {
+      if (response) {
+        const res: Photo = JSON.parse(response);
+        const photo = {
+          id: res.id,
+          url: res.url,
+          publicId: res.publicId
+        };
+        this.service.photo = photo;
+      }
+    };
+  }
 }
 
+//#region Modal delete photo component
+@Component({
+  selector: 'app-modal-service-image-detail',
+  templateUrl: './_template/photo-detail.html'
+})
+export class ModalServicePhotoDetailComponent implements OnInit {
+  title: string;
+  service: Service;
+  photo: Photo;
+
+  baseUrl = environment.apiUrl;
+
+  constructor(
+    public modalRef: BsModalRef,
+    private servicesService: ServicesService,
+    private alertify: AlertifyService
+  ) { }
+
+  ngOnInit() {
+  }
+
+  deletePhoto(serviceId: number, id: number) {
+    this.servicesService.deletePhoto(serviceId, id).subscribe(() => {
+      this.alertify.success('Deleted');
+      this.modalRef.hide();
+      this.service.photo = null;
+    }, error => {
+      this.alertify.error(error);
+    });
+  }
+}
+//#endregion
 //#region Modal detail component
 @Component({
   selector: 'app-modal-service-detail',
@@ -88,6 +190,7 @@ export class ModalServiceDetailComponent implements OnInit {
     });
   }
 }
+// #endregion
 
 //#region Modal delete component
 @Component({

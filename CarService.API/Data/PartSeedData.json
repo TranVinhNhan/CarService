@@ -15,7 +15,20 @@
             "Contact": "test@gmail.com",
             "AutomotiveParts": []
         },
-        "Photos": [],
+        "Photos": [
+            {
+                "Url": "http://res.cloudinary.com/dl0azhllb/image/upload/v1574759547/ur0kjzlcv98irhyad6ce.jpg",
+                "PublicId": "ur0kjzlcv98irhyad6ce"
+            },
+            {
+                "Url": "http://res.cloudinary.com/dl0azhllb/image/upload/v1574759549/iv82is1pml3vffwwwpqz.jpg",
+                "PublicId": "iv82is1pml3vffwwwpqz"
+            },
+            {
+                "Url": "http://res.cloudinary.com/dl0azhllb/image/upload/v1574759551/evnkqkkksngbjg2s6raq.jpg",
+                "PublicId": "evnkqkkksngbjg2s6raq"
+            }
+        ],
         "AutomotivePartRepairReceipts": []
     },
     {
@@ -34,7 +47,12 @@
             "Contact": "test@gmail.com",
             "AutomotiveParts": []
         },
-        "Photos": [],
+        "Photos": [
+            {
+                "Url": "http://res.cloudinary.com/dl0azhllb/image/upload/v1574759569/l8uv8dv6wpllcuppasi7.jpg",
+                "PublicId": "l8uv8dv6wpllcuppasi7"
+            }
+        ],
         "AutomotivePartRepairReceipts": []
     },
     {
@@ -53,7 +71,12 @@
             "Contact": "test@gmail.com",
             "AutomotiveParts": []
         },
-        "Photos": [],
+        "Photos": [
+            {
+                "Url": "http://res.cloudinary.com/dl0azhllb/image/upload/v1574759581/filk9bolqenvscualbuy.jpg",
+                "PublicId": "filk9bolqenvscualbuy"
+            }
+        ],
         "AutomotivePartRepairReceipts": []
     },
     {
@@ -72,7 +95,12 @@
             "Contact": "test@gmail.com",
             "AutomotiveParts": []
         },
-        "Photos": [],
+        "Photos": [
+            {
+                "Url": "http://res.cloudinary.com/dl0azhllb/image/upload/v1574759591/wllpdwapbwwilvbxjn5u.png",
+                "PublicId": "wllpdwapbwwilvbxjn5u"
+            }
+        ],
         "AutomotivePartRepairReceipts": []
     },
     {
@@ -91,7 +119,12 @@
             "Contact": "test@gmail.com",
             "AutomotiveParts": []
         },
-        "Photos": [],
+        "Photos": [
+            {
+                "Url": "http://res.cloudinary.com/dl0azhllb/image/upload/v1574759601/u31o9ebl4ycovobuci8m.jpg",
+                "PublicId": "u31o9ebl4ycovobuci8m"
+            }
+        ],
         "AutomotivePartRepairReceipts": []
     }
 ]

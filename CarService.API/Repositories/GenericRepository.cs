@@ -89,7 +89,10 @@ namespace CarService.API.Repositories
 
         public async Task<IEnumerable<Service>> GetAllServices()
         {
-            var services = await _context.Services.Include(c => c.CarReceiptServices).ToListAsync();
+            var services = await _context.Services
+            .Include(c => c.CarReceipts)
+            .Include(s => s.Photo)
+            .ToListAsync();
 
             return services;
         }
@@ -115,8 +118,8 @@ namespace CarService.API.Repositories
         public async Task<Service> GetService(int id)
         {
             var service = await _context.Services
-                .Include(s => s.CarReceiptServices)
-                .ThenInclude(s => s.CarReceipt)
+                .Include(s => s.CarReceipts)
+                .Include(s => s.Photo)
                 .FirstOrDefaultAsync(s => s.Id == id);
 
             return service;

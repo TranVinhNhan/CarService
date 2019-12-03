@@ -35,8 +35,8 @@ export class AutopartService {
       ));
   }
 
-  deletePhoto(userId: number, id: number) {
-    return this.http.delete(this.baseUrl + 'automotives/' + userId + '/photos/' + id);
+  deletePhoto(partId: number, id: number) {
+    return this.http.delete(this.baseUrl + 'automotives/' + partId + '/photos/' + id);
   }
 
   updatePart(id: number, model: any) {

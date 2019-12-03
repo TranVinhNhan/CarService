@@ -9,6 +9,8 @@ import { ProductDetailResolver } from '../_resolvers/product-detail.resolver';
 import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
+import { RepairComponent } from './repair/repair.component';
+import { ListServiceComponent } from './list-service/list-service.component';
 
 
 const routes: Routes = [
@@ -22,7 +24,9 @@ const routes: Routes = [
             {path: 'products/:id', component: ProductDetailComponent, resolve: {part: ProductDetailResolver}},
             {path: 'cart', component: CartComponent},
             {path: 'checkout', component: CheckoutComponent},
-            {path: 'myorders', component: MyOrdersComponent}
+            {path: 'myorders', component: MyOrdersComponent},
+            {path: 'services', component: ListServiceComponent},
+            {path: 'request', component: RepairComponent}
         ]
     }
 ];

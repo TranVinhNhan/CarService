@@ -8,6 +8,8 @@ namespace CarService.API.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public double Price { get; set; }
-        public ICollection<CarReceiptService> CarReceiptServices { get; set; }
+        public ICollection<CarReceipt> CarReceipts { get; set; }
+        public Photo Photo { get; set; }
+        public int PhotoId { get; set; }
     }
 }

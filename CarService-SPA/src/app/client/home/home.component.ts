@@ -12,6 +12,7 @@ import { ShoppingCartItem } from 'src/app/_models/shoppingcartitem';
 })
 export class HomeComponent implements OnInit {
 
+  searchString: string;
   parts: AutoPart[];
   allParts: AutoPart[];
   constructor(
@@ -95,6 +96,15 @@ export class HomeComponent implements OnInit {
 
     if (type === 'all') {
       this.parts = this.allParts;
+    }
+  }
+
+  searchProduct(searchString: string) {
+    if (!searchString) {
+      this.parts = this.allParts;
+      const filterParam = searchString;
+      const partFilterList = this.parts.filter((part: AutoPart) => part.name === filterParam);
+      this.parts = partFilterList;
     }
   }
 }

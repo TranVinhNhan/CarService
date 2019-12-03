@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ClientComponent } from './client.component';
 import { ClientRoutingModule } from './client-routing.module';
@@ -17,13 +17,17 @@ import { ShoppingCartService } from '../_services/shopping-cart.service';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ProductOrderService } from '../_services/product-order.service';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
+import { RepairComponent } from './repair/repair.component';
+import { ListServiceComponent } from './list-service/list-service.component';
+import { CarouselModule } from 'ngx-bootstrap';
 
 @NgModule({
   imports: [
     CommonModule,
     ClientRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CarouselModule
   ],
   declarations: [
     ClientComponent,
@@ -35,13 +39,16 @@ import { MyOrdersComponent } from './my-orders/my-orders.component';
     ProductDetailComponent,
     CartComponent,
     CheckoutComponent,
-    MyOrdersComponent
+    MyOrdersComponent,
+    RepairComponent,
+    ListServiceComponent
   ],
   providers: [
     AutopartService,
-    ProductDetailResolver,
     ShoppingCartService,
-    ProductOrderService
+    ProductOrderService,
+
+    ProductDetailResolver
   ]
 })
 export class ClientModule { }
