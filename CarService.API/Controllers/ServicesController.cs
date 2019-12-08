@@ -22,6 +22,7 @@ namespace CarService.API.Controllers
             _repo = repo;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetServices()
         {
@@ -67,7 +68,7 @@ namespace CarService.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateService (int id, ServiceForUpdateDto serviceForUpdateDto)
+        public async Task<IActionResult> UpdateService(int id, ServiceForUpdateDto serviceForUpdateDto)
         {
             var serviceFromRepo = await _repo.GetService(id);
 

@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarService.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20191203030817_ServicePhotoRela")]
-    partial class ServicePhotoRela
+    [Migration("20191204040805_CarReceiptEdit")]
+    partial class CarReceiptEdit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -86,13 +86,21 @@ namespace CarService.API.Migrations
 
                     b.Property<DateTime>("DayReceived");
 
+                    b.Property<string>("Email");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("LastName");
+
                     b.Property<string>("LicensePlateNumber");
 
-                    b.Property<int>("RepairReceiptId");
+                    b.Property<string>("PhoneNumber");
+
+                    b.Property<int?>("RepairReceiptId");
 
                     b.Property<int>("ServiceId");
 
-                    b.Property<int>("UserId");
+                    b.Property<int?>("UserId");
 
                     b.HasKey("Id");
 
@@ -319,8 +327,7 @@ namespace CarService.API.Migrations
 
                     b.HasOne("CarService.API.Models.User", "User")
                         .WithMany("CarReceipts")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("CarService.API.Models.Photo", b =>

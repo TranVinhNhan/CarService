@@ -30,6 +30,8 @@ namespace CarService.API.Helpers
 
             CreateMap<ProductOrderDetailForCreationDto, ProductOrderDetail>();
             CreateMap<ProductOrderForCreationDto, ProductOrder>();
+
+            CreateMap<CarReceiptForCreationDto, CarReceipt>();
         }
     }
 }

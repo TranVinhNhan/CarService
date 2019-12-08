@@ -4,27 +4,39 @@
         "Description": "Our milti-point oil change service will ensure that your car continues to operate efficiently with clean oil and proper fluid levels using Kendall Premium Oil products including synthetic blend, high-mileage and full synthetic oils.",
         "Price": 10.99,
         "CarReceiptServices": [],
-        "Photo": {}
+        "Photo": {
+            "Url": "http://res.cloudinary.com/dl0azhllb/image/upload/v1575388780/ujqcnyfivkgyzlzcvjcb.jpg",
+            "PublicId": "ujqcnyfivkgyzlzcvjcb"
+        }
     },
     {
         "Name": "Brake",
         "Description": "Brake and ABS repair and maintenance for all makes and models of vehicles. Ask about our free brake inspections.",
         "Price": 10.99,
         "CarReceiptServices": [],
-        "Photo": {}
+        "Photo": {
+            "Url": "http://res.cloudinary.com/dl0azhllb/image/upload/v1575389651/rd2sxtdocguhqvelmj6q.jpg",
+            "PublicId": "rd2sxtdocguhqvelmj6q"
+        }
     },
     {
         "Name": "Wheel Alignment",
         "Description": "All wheel alignment using state-of-the-art laser technology. Using a Hunter Engineering Alignment Machine.",
         "Price": 10.99,
         "CarReceiptServices": [],
-        "Photo": {}
+        "Photo": {
+            "Url": "http://res.cloudinary.com/dl0azhllb/image/upload/v1575389660/fa1nzqzyvb1idlzqbkic.jpg",
+            "PublicId": "fa1nzqzyvb1idlzqbkic"
+        }
     },
     {
         "Name": "Full Service",
         "Description": "From advanced level check engine diagnostics to manufacture's scheduled maintenance and everything in between.",
         "Price": 10.99,
         "CarReceiptServices": [],
-        "Photo": {}
+        "Photo": {
+            "Url": "http://res.cloudinary.com/dl0azhllb/image/upload/v1575389667/ldbyeelrpiqnw7k1gwfn.jpg",
+            "PublicId": "ldbyeelrpiqnw7k1gwfn"
+        }
     }
 ]

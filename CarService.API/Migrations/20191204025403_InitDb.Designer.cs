@@ -3,14 +3,16 @@ using System;
 using CarService.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CarService.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20191204025403_InitDb")]
+    partial class InitDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -84,15 +86,7 @@ namespace CarService.API.Migrations
 
                     b.Property<DateTime>("DayReceived");
 
-                    b.Property<string>("Email");
-
-                    b.Property<string>("FirstName");
-
-                    b.Property<string>("LastName");
-
                     b.Property<string>("LicensePlateNumber");
-
-                    b.Property<string>("PhoneNumber");
 
                     b.Property<int?>("RepairReceiptId");
 

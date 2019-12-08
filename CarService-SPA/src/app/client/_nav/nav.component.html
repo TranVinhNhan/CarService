@@ -128,106 +128,128 @@
   </div>
 
   <!-- Header Mobile -->
-  <div class="wrap_header_mobile">
-    <!-- Logo moblie -->
-    <a href="index.html" class="logo-mobile">
-      <img src="../assets/client/images/icons/logo.png" alt="IMG-LOGO">
-    </a>
-
-    <!-- Button show menu -->
-    <div class="btn-show-menu">
-      <!-- Header Icon mobile -->
-      <div class="header-icons-mobile">
-        <a href="#" class="header-wrapicon1 dis-block">
-          <img src="../assets/client/images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
-        </a>
-
-        <span class="linedivide2"></span>
-
-        <div class="header-wrapicon2">
-          <img src="../assets/client/images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown"
-            alt="ICON">
-          <span class="header-icons-noti">0</span>
-
-          <!-- Header cart noti -->
-          <div class="header-cart header-dropdown">
-            <ul class="header-cart-wrapitem">
-              <li class="header-cart-item">
-                <div class="header-cart-item-img">
-                  <img src="../assets/client/images/item-cart-01.jpg" alt="IMG">
-                </div>
-
-                <div class="header-cart-item-txt">
-                  <a href="#" class="header-cart-item-name">
-                    White Shirt With Pleat Detail Back
-                  </a>
-
-                  <span class="header-cart-item-info">
-                    1 x $19.00
-                  </span>
-                </div>
-              </li>
-
-              <li class="header-cart-item">
-                <div class="header-cart-item-img">
-                  <img src="../assets/client/images/item-cart-02.jpg" alt="IMG">
-                </div>
-
-                <div class="header-cart-item-txt">
-                  <a href="#" class="header-cart-item-name">
-                    Converse All Star Hi Black Canvas
-                  </a>
-
-                  <span class="header-cart-item-info">
-                    1 x $39.00
-                  </span>
-                </div>
-              </li>
-
-              <li class="header-cart-item">
-                <div class="header-cart-item-img">
-                  <img src="../assets/client/images/item-cart-03.jpg" alt="IMG">
-                </div>
-
-                <div class="header-cart-item-txt">
-                  <a href="#" class="header-cart-item-name">
-                    Nixon Porter Leather Watch In Tan
-                  </a>
-
-                  <span class="header-cart-item-info">
-                    1 x $17.00
-                  </span>
-                </div>
-              </li>
-            </ul>
-
-            <div class="header-cart-total">
-              Total: $75.00
-            </div>
-
-            <div class="header-cart-buttons">
-              <div class="header-cart-wrapbtn">
-                <!-- Button -->
-                <a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                  View Cart
-                </a>
-              </div>
-
-              <div class="header-cart-wrapbtn">
-                <!-- Button -->
-                <a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                  Check Out
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
+  <div class="container-menu-header">
+    <div class="topbar">
+      <div class="topbar-social">
+        <a href="#" class="topbar-social-item fa fa-facebook"></a>
+        <a href="#" class="topbar-social-item fa fa-instagram"></a>
+        <a href="#" class="topbar-social-item fa fa-pinterest-p"></a>
+        <a href="#" class="topbar-social-item fa fa-snapchat-ghost"></a>
+        <a href="#" class="topbar-social-item fa fa-youtube-play"></a>
       </div>
 
-      <div class="btn-show-menu-mobile hamburger hamburger--squeeze">
-        <span class="hamburger-box">
-          <span class="hamburger-inner"></span>
+      <span class="topbar-child1">
+        Free shipping for standard order over $100
+      </span>
+
+      <div class="topbar-child2">
+        <span class="topbar-email">
+          fashe@example.com
         </span>
+
+        <div class="topbar-language rs1-select2">
+          <select class="selection-1" name="time">
+            <option>USD</option>
+            <option>EUR</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrap_header">
+      <!-- Logo ../assets/client/images/icons/logo.png -->
+      <a [routerLink]="['/']" routerLinkActive="router-link-active" class="logo">
+        <img src="../assets/client/images/icons/logo-2.png" alt="IMG-LOGO">
+      </a>
+
+      <!-- Menu -->
+      <div class="wrap_menu">
+        <nav class="menu">
+          <ul class="main_menu">
+            <li routerLinkActive="sale-noti">
+              <a [routerLink]="['/']">Home</a>
+            </li>
+
+            <li routerLinkActive="sale-noti">
+              <a [routerLink]="['/']">Shop</a>
+            </li>
+
+            <li class="sale-noti">
+              <a [routerLink]="['/']">Sale</a>
+            </li>
+
+            <li>
+              <a [routerLink]="['/services']">Services</a>
+            </li>
+
+            <li>
+              <a href="blog.html">Blog</a>
+            </li>
+
+            <li>
+              <a href="about.html">About</a>
+            </li>
+
+            <li>
+              <a href="contact.html">Contact</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <!-- Header Icon -->
+      <div class="header-icons">
+        <div *ngIf="!loggedIn()" class="wrap_menu">
+          <nav class="menu">
+            <ul class="main_menu">
+              <li>
+                <a style="border-bottom: none;" href=""><img src="../assets/client/images/icons/icon-header-01.png"
+                    class="header-icon1" alt="ICON"></a>
+                <ul style="width: 150px;" class="sub_menu">
+                  <li><a [routerLink]="['/login']">Login</a></li>
+                  <li><a [routerLink]="['/register']">Register</a></li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <div *ngIf="loggedInAsAdmin()" class="wrap_menu">
+          <nav class="menu">
+            <ul class="main_menu">
+              <li>
+                <a href="">Welcome {{this.authService.decodedToken?.unique_name | titlecase}}</a>
+                <ul style="width: 150px;" class="sub_menu">
+                  <li style="cursor: pointer;"><i class="fa fa-dashboard"></i><a [routerLink]="['/admin']">Dashboard</a>
+                  </li>
+                  <li style="cursor: pointer;"><i class="fa fa-sign-out"></i><a (click)="logout()">Sign Out</a></li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <div *ngIf="loggedInAsUser()" class="wrap_menu">
+          <nav class="menu">
+            <ul class="main_menu">
+              <li>
+                <a href="">Welcome {{this.authService.decodedToken?.unique_name | titlecase}}</a>
+                <ul style="width: 150px;" class="sub_menu">
+                  <li style="cursor: pointer;"><i class="fa fa-shopping-cart"></i><a [routerLink]="['/myorders']">Orders</a></li>
+                  <li style="cursor: pointer;"><i class="fa fa-sign-out"></i><a (click)="logout()">Sign Out</a></li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <span class="linedivide1"></span>
+
+        <div class="header-wrapicon2">
+          <a [routerLink]="['/cart']"><img src="../assets/client/images/icons/icon-header-02.png" class="header-icon1"
+              alt="ICON"></a>
+          <span class="header-icons-noti">{{cartItemCount}}</span>
+        </div>
       </div>
     </div>
   </div>

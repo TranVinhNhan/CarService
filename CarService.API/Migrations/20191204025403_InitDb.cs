@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CarService.API.Migrations
 {
-    public partial class ServicePhotoRela : Migration
+    public partial class InitDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -115,9 +115,9 @@ namespace CarService.API.Migrations
                     CarModel = table.Column<string>(nullable: true),
                     Brand = table.Column<string>(nullable: true),
                     DayReceived = table.Column<DateTime>(nullable: false),
-                    UserId = table.Column<int>(nullable: false),
+                    UserId = table.Column<int>(nullable: true),
                     ServiceId = table.Column<int>(nullable: false),
-                    RepairReceiptId = table.Column<int>(nullable: false)
+                    RepairReceiptId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -133,7 +133,7 @@ namespace CarService.API.Migrations
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(

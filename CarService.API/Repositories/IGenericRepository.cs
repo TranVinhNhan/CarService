@@ -39,5 +39,9 @@ namespace CarService.API.Repositories
          Task<IEnumerable<ProductOrder>> GetOrders();
          Task<ProductOrder> GetOrderByUser(int userId);
          Task<ProductOrder> GetOrderById(int orderId);
+
+         // Car Receipt
+         Task<CarReceipt> GetCarReceipt(int id);
+         Task<IEnumerable<CarReceipt>> GetCarReceipts();
     }
 }

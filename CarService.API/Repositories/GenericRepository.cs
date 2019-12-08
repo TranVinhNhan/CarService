@@ -145,5 +145,27 @@ namespace CarService.API.Repositories
 
             return order;
         }
+
+        public async Task<CarReceipt> GetCarReceipt(int id)
+        {
+            var carReceipt = await _context.CarReceipts
+            .Include(c => c.Service)
+            .Include(c => c.User)
+            .Include(c => c.RepairReceipt)
+            .FirstOrDefaultAsync(c => c.Id == id);
+
+            return carReceipt;
+        }
+
+        public async Task<IEnumerable<CarReceipt>> GetCarReceipts()
+        {
+            var carReceipts = await _context.CarReceipts
+            .Include(c => c.Service)
+            .Include(c => c.User)
+            .Include(c => c.RepairReceipt)
+            .ToListAsync();
+
+            return carReceipts;
+        }
     }
 }

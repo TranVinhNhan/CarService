@@ -20,6 +20,7 @@ import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { RepairComponent } from './repair/repair.component';
 import { ListServiceComponent } from './list-service/list-service.component';
 import { CarouselModule } from 'ngx-bootstrap';
+import { CarReceiptService } from '../_services/car-receipt.service';
 
 @NgModule({
   imports: [
@@ -47,6 +48,7 @@ import { CarouselModule } from 'ngx-bootstrap';
     AutopartService,
     ShoppingCartService,
     ProductOrderService,
+    CarReceiptService,
 
     ProductDetailResolver
   ]

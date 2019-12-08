@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container mb-5">
   <div class="py-5 text-center">
     <img class="d-block mx-auto mb-4" src="../../../assets/client/images/icons/logo-2.png" alt="">
     <h2>Car Repair</h2>
@@ -57,18 +57,22 @@
     </div>
     <div class="col-md-8 order-md-1">
       <h4 class="mb-3">Infomation</h4>
-      <form class="needs-validation" novalidate>
+      <form [formGroup]="requestServiceForm" class="needs-validation" novalidate (submit)="requestService()">
         <div class="row">
           <div class="col-md-6 mb-3">
             <label for="firstName">First name</label>
-            <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+            <input [ngClass]="{'is-invalid': requestServiceForm.get('firstname').errors && requestServiceForm.get('firstname').touched,
+            'is-valid': !requestServiceForm.get('firstname').errors && requestServiceForm.get('firstname').touched}"
+              formControlName="firstname" type="text" class="form-control" id="firstName">
             <div class="invalid-feedback">
               Valid first name is required.
             </div>
           </div>
           <div class="col-md-6 mb-3">
             <label for="lastName">Last name</label>
-            <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+            <input [ngClass]="{'is-invalid': requestServiceForm.get('lastname').errors && requestServiceForm.get('lastname').touched,
+            'is-valid': !requestServiceForm.get('lastname').errors && requestServiceForm.get('lastname').touched}"
+              formControlName="lastname" type="text" class="form-control" id="lastName">
             <div class="invalid-feedback">
               Valid last name is required.
             </div>
@@ -76,16 +80,27 @@
         </div>
 
         <div class="row">
-          <div class="col-md-6 mb-3">
+          <div class="col-md-4 mb-3">
             <label for="licensePlateNumber">License Plate Number</label>
-            <input type="text" class="form-control" id="licensePlateNumber" placeholder="" value="" required>
+            <input type="text" class="form-control" id="licensePlateNumber" [ngClass]="{'is-invalid': requestServiceForm.get('licensePlateNumber').errors && requestServiceForm.get('licensePlateNumber').touched,
+            'is-valid': !requestServiceForm.get('licensePlateNumber').errors && requestServiceForm.get('licensePlateNumber').touched}"
+              formControlName="licensePlateNumber">
             <div class="invalid-feedback">
               License plate number is required.
             </div>
           </div>
-          <div class="col-md-6 mb-3">
+          <div class="col-md-4 mb-3">
+            <label for="brand">Brand</label>
+            <input type="text" class="form-control" id="brand" [ngClass]="{'is-invalid': requestServiceForm.get('brand').errors && requestServiceForm.get('brand').touched,
+            'is-valid': !requestServiceForm.get('brand').errors && requestServiceForm.get('brand').touched}" formControlName="brand">
+            <div class="invalid-feedback">
+              Brand is required.
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
             <label for="carModel">Car Model</label>
-            <input type="text" class="form-control" id="carModel" placeholder="" value="" required>
+            <input type="text" class="form-control" id="carModel" [ngClass]="{'is-invalid': requestServiceForm.get('carModel').errors && requestServiceForm.get('carModel').touched,
+            'is-valid': !requestServiceForm.get('carModel').errors && requestServiceForm.get('carModel').touched}" formControlName="carModel">
             <div class="invalid-feedback">
               Car model is required.
             </div>
@@ -93,8 +108,10 @@
         </div>
 
         <div class="mb-3">
-          <label for="email">Email <span class="text-muted">(Optional)</span></label>
-          <input type="email" class="form-control" id="email" placeholder="you@example.com">
+          <label for="email">Email <span class="text-muted"></span></label>
+          <input type="email" [ngClass]="{'is-invalid': requestServiceForm.get('email').errors && requestServiceForm.get('email').touched,
+          'is-valid': !requestServiceForm.get('email').errors && requestServiceForm.get('email').touched}"
+            formControlName="email" class="form-control" id="email" placeholder="you@example.com">
           <div class="invalid-feedback">
             Please enter a valid email address for shipping updates.
           </div>
@@ -102,7 +119,9 @@
 
         <div class="mb-3">
           <label for="address">Address</label>
-          <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
+          <input type="text" [ngClass]="{'is-invalid': requestServiceForm.get('address').errors && requestServiceForm.get('address').touched,
+          'is-valid': !requestServiceForm.get('address').errors && requestServiceForm.get('address').touched}"
+            formControlName="address" class="form-control" id="address" placeholder="1234 Main St">
           <div class="invalid-feedback">
             Please enter your shipping address.
           </div>
@@ -110,7 +129,10 @@
 
         <div class="mb-3">
           <label for="phoneNumber">Phone Number</label>
-          <input type="number" class="form-control" id="phoneNumber" placeholder="" required>
+          <input type="number"
+            [ngClass]="{'is-invalid': requestServiceForm.get('phoneNumber').errors && requestServiceForm.get('phoneNumber').touched,
+            'is-valid': !requestServiceForm.get('phoneNumber').errors && requestServiceForm.get('phoneNumber').touched}"
+            formControlName="phoneNumber" class="form-control" id="phoneNumber" placeholder="+84">
           <div class="invalid-feedback">
             Please enter your phone number.
           </div>
@@ -119,9 +141,11 @@
         <div class="row">
           <div class="col-md-4 mb-3">
             <label for="state">Choose your desired service</label>
-            <select class="custom-select d-block w-100" id="state" required>
+            <select [ngClass]="{'is-invalid': requestServiceForm.get('serviceId').errors && requestServiceForm.get('serviceId').touched,
+            'is-valid': !requestServiceForm.get('serviceId').errors && requestServiceForm.get('serviceId').touched}"
+              formControlName="serviceId" class="custom-select d-block w-100" id="our-services" required>
               <option value="">Choose...</option>
-              <option>California</option>
+              <option *ngFor="let service of services" [ngValue]="service.id">{{service.name}}</option>
             </select>
             <div class="invalid-feedback">
               Please provide a valid state.
@@ -139,7 +163,8 @@
           <label class="custom-control-label" for="save-info">Save this information for next time</label>
         </div>
         <hr class="mb-4">
-        <button class="btn btn-primary btn-lg btn-block" type="submit">Request Service</button>
+        <button class="btn btn-primary btn-lg btn-block" type="submit" [disabled]="!requestServiceForm.valid">Request
+          Service</button>
       </form>
     </div>
   </div>
