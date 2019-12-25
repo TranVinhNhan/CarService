@@ -23,11 +23,6 @@ export class RegisterComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.registerForm = new FormGroup({
-    //   username: new FormControl('', Validators.required),
-    //   password: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]),
-    //   confirmPassword: new FormControl('', Validators.required)
-    // }, this.passwordMatchValidator);
     this.createRegisterForm();
   }
 
@@ -35,7 +30,7 @@ export class RegisterComponent implements OnInit {
     this.registerForm = this.fb.group({
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
-      gender: ['male'],
+      gender: ['Male'],
       email: ['', Validators.required],
       phoneNumber: ['', Validators.required],
       address: ['', Validators.required],

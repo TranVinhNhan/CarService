@@ -3,6 +3,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { CarReceiptDetail } from '../_models/carReceiptDetail';
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +21,9 @@ export class CarReceiptService {
         return response;
       })
     );
+  }
+
+  getCarReceiptsByUser(userId: number): Observable<CarReceiptDetail[]> {
+    return this.http.get<CarReceiptDetail[]>(this.baseUrl + 'carreceipts/' + userId);
   }
 }

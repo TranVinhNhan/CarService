@@ -22,37 +22,43 @@
 
           <ul class="p-b-54">
             <li class="p-t-4">
-              <button class="s-text13 active1" (click)="filter('all')">
+              <button class="s-text13" [ngClass]="{active1: isActiveAll}" (click)="filter('all'); isActiveAll = true;
+              isActiveWheel = isActiveSeat = isActiveMirror = isActiveSWheel = isActiveLSeat = false">
                 All
               </button>
             </li>
 
             <li class="p-t-4">
-              <button class="s-text13" (click)="filter('Wheel')">
+              <button class="s-text13"  [ngClass]="{active1: isActiveWheel}" (click)="filter('Wheel'); isActiveWheel = true;
+              isActiveAll = isActiveSeat = isActiveMirror = isActiveSWheel = isActiveLSeat = false">
                 Wheel
               </button>
             </li>
 
             <li class="p-t-4">
-              <button class="s-text13" (click)="filter('Seat')">
+              <button class="s-text13"  [ngClass]="{active1: isActiveSeat}" (click)="filter('Seat'); isActiveSeat = true;
+              isActiveAll = isActiveWheel = isActiveMirror = isActiveSWheel = isActiveLSeat = false">
                 Seat
               </button>
             </li>
 
             <li class="p-t-4">
-              <button class="s-text13" (click)="filter('Mirror')">
+              <button class="s-text13"  [ngClass]="{active1: isActiveMirror}" (click)="filter('Mirror'); isActiveMirror = true;
+              isActiveAll = isActiveWheel = isActiveSeat = isActiveSWheel = isActiveLSeat = false">
                 Mirror
               </button>
             </li>
 
             <li class="p-t-4">
-              <button class="s-text13" (click)="filter('Steering Wheel')">
+              <button class="s-text13"  [ngClass]="{active1: isActiveSWheel}" (click)="filter('Steering Wheel'); isActiveSWheel = true;
+              isActiveAll = isActiveWheel = isActiveSeat = isActiveMirror = isActiveLSeat = false">
                 Steering Wheel
               </button>
             </li>
             
             <li class="p-t-4">
-              <button class="s-text13" (click)="filter('Leather Seat')">
+              <button class="s-text13"  [ngClass]="{active1: isActiveLSeat}" (click)="filter('Leather Seat'); isActiveLSeat = true;
+              isActiveAll = isActiveWheel = isActiveSeat = isActiveMirror = isActiveSWheel = false">
                 Leather Seat
               </button>
             </li>
@@ -64,9 +70,9 @@
           </h4>
 
           <div class="search-product pos-relative bo4 of-hidden">
-            <input [(ngModel)]="searchString" class="s-text7 size6 p-l-23 p-r-50" type="text" name="search-product" placeholder="Search Products...">
+            <input [(ngModel)]="searchText" class="s-text7 size6 p-l-23 p-r-50" type="text" name="search-product" placeholder="Search Products...">
 
-            <button (click)="searchProduct(searchString)" class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4">
+            <button class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4">
               <i class="fs-12 fa fa-search" aria-hidden="true"></i>
             </button>
           </div>
@@ -76,7 +82,7 @@
       <div class="col-sm-6 col-md-8 col-lg-9 p-b-50">
         <!--  -->
         <div class="flex-sb-m flex-w p-b-35">
-          <div class="flex-w">
+          <!-- <div class="flex-w">
             <div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
               <select class="selection-2" name="sorting">
                 <option>Default Sorting</option>
@@ -97,16 +103,16 @@
 
               </select>
             </div>
-          </div>
+          </div> -->
 
           <span class="s-text8 p-t-5 p-b-5">
-            Showing 1–12 of 16 results
+            Showing 1–{{parts?.length}} of {{parts?.length}} results
           </span>
         </div>
 
         <!-- Product -->
         <div class="row">
-          <div class="col-sm-12 col-md-6 col-lg-4 p-b-50" *ngFor="let part of parts">
+          <div class="col-sm-12 col-md-6 col-lg-4 p-b-50" *ngFor="let part of parts | filter : searchText">
             <!-- Block2 -->
             <div class="block2">
               <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">

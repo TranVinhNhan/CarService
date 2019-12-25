@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FilterPipe } from '../_filters/filter.pipe';
 
 import { ClientComponent } from './client.component';
 import { ClientRoutingModule } from './client-routing.module';
@@ -19,8 +20,10 @@ import { ProductOrderService } from '../_services/product-order.service';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { RepairComponent } from './repair/repair.component';
 import { ListServiceComponent } from './list-service/list-service.component';
-import { CarouselModule } from 'ngx-bootstrap';
+import { CarouselModule, TabsModule } from 'ngx-bootstrap';
 import { CarReceiptService } from '../_services/car-receipt.service';
+import { MyServicesComponent } from './my-services/my-services.component';
+import { MyPurchasesComponent } from './my-purchases/my-purchases.component';
 
 @NgModule({
   imports: [
@@ -28,7 +31,8 @@ import { CarReceiptService } from '../_services/car-receipt.service';
     ClientRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    CarouselModule
+    CarouselModule,
+    TabsModule.forRoot()
   ],
   declarations: [
     ClientComponent,
@@ -41,8 +45,11 @@ import { CarReceiptService } from '../_services/car-receipt.service';
     CartComponent,
     CheckoutComponent,
     MyOrdersComponent,
+    MyServicesComponent,
+    MyPurchasesComponent,
     RepairComponent,
-    ListServiceComponent
+    ListServiceComponent,
+    FilterPipe
   ],
   providers: [
     AutopartService,

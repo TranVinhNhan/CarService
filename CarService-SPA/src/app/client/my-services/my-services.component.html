@@ -1,0 +1,29 @@
+<div style="min-height: 500px;">
+  <table id="example" class="table table-striped table-bordered" style="width:100%">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Contact</th>
+        <th>License Number</th>
+        <th>Car Model</th>
+        <th>Brand</th>
+        <th>Day Placed</th>
+        <th>Requested Service</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of carReceipts">
+        <td>{{item.firstName}} {{item.lastName}}</td>
+        <td>Email: {{item.email}} <br /> Phone: {{item.phoneNumber}}</td>
+        <td>{{item.licensePlateNumber}}</td>
+        <td>{{item.carModel}}</td>
+        <td>{{item.brand}}</td>
+        <td>{{item.dayReceived | date: 'medium'}}</td>
+        <td>{{item.serviceName}}</td>
+        <td>
+          <button>Cancel Order</button>
+        </td>
+      </tr>
+  </table>
+</div>

@@ -1,5 +1,4 @@
-<div class="container" style="min-height: 500px;">
-  <h2 class="m-5 text-center">My Orders</h2>
+<div style="min-height: 500px;">
   <table id="example" class="table table-striped table-bordered" style="width:100%">
     <thead>
       <tr>
@@ -19,7 +18,7 @@
         <td>{{order.orderPlacedTime | date: 'medium'}}</td>
         <td>{{order.status}}</td>
         <td><span *ngFor="let item of order.productOrderDetails" class="block-email">{{item.name}} x
-            {{item.quantity}}</span></td>
+            {{item.quantity}}<br/></span></td>
         <td>${{order.orderTotal}}</td>
         <td>
           <button (click)="cancelOrderFromUser(order)">Cancel Order</button>

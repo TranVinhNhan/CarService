@@ -31,7 +31,11 @@ namespace CarService.API.Repositories
 
         public async Task<User> GetUser(int id)
         {
-            var user = await _context.Users.Include(c => c.CarReceipts).Include(u => u.ProductOrders).ThenInclude(p => p.ProductOrderDetails).FirstOrDefaultAsync(u => u.Id == id);
+            var user = await _context.Users
+            .Include(c => c.CarReceipts)
+            .Include(u => u.ProductOrders)
+            .ThenInclude(p => p.ProductOrderDetails)
+            .FirstOrDefaultAsync(u => u.Id == id);
 
             return user;
         }

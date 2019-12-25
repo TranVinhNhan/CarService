@@ -1,13 +1,18 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using CarService.API.Dtos;
 using CarService.API.Models;
 using CarService.API.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarService.API.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class CarReceiptsController : ControllerBase
@@ -21,6 +26,7 @@ namespace CarService.API.Controllers
 
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> AddCarReceipt(CarReceiptForCreationDto carReceiptForCreationDto)
         {
@@ -37,7 +43,7 @@ namespace CarService.API.Controllers
 
                 if (await _repo.SaveAll())
                 {
-                    return CreatedAtRoute("GetCarReceipt", new { controller = "CarReceipts", id = carReceiptForCreation.Id}, carReceiptForCreation);
+                    return CreatedAtRoute("GetCarReceipt", new { controller = "CarReceipts", id = carReceiptForCreation.Id }, carReceiptForCreation);
                 }
 
                 throw new Exception($"Create car receipt failed on save");
@@ -55,14 +61,14 @@ namespace CarService.API.Controllers
 
                 if (await _repo.SaveAll())
                 {
-                    return CreatedAtRoute("GetCarReceipt", new { controller = "CarReceipts", id = carReceiptForCreation.Id}, carReceiptForCreation);
+                    return CreatedAtRoute("GetCarReceipt", new { controller = "CarReceipts", id = carReceiptForCreation.Id }, carReceiptForCreation);
                 }
 
                 throw new Exception($"Create Car Receipt failed on save");
             }
         }
 
-        [HttpGet("{id}", Name = "GetCarReceipt")]
+        [HttpGet("admin/{id}", Name = "GetCarReceipt")]
         public async Task<IActionResult> GetCarReceipt(int id)
         {
             var carReceipt = await _repo.GetCarReceipt(id);
@@ -74,8 +80,42 @@ namespace CarService.API.Controllers
         public async Task<IActionResult> GetCarReceipts()
         {
             var carReceipts = await _repo.GetCarReceipts();
+            List<CarReceiptForReturnDto> list = new List<CarReceiptForReturnDto>();
+            foreach (var item in carReceipts)
+            {
+                var mappedItem = _mapper.Map<CarReceiptForReturnDto>(item);
+                list.Add(mappedItem);
+            }
 
-            return Ok(carReceipts);
+            return Ok(list);
+        }
+
+        [AllowAnonymous]
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> GetCarReceiptsByUser(int userId)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            {
+                return Unauthorized();
+            }
+            if (userId == 2)
+            {
+                return Unauthorized();
+            }
+
+            var userFromRepo = await _repo.GetUser(userId);
+            if (userFromRepo == null)
+            {
+                return BadRequest();
+            }
+            List<CarReceiptForReturnDto> list = new List<CarReceiptForReturnDto>();
+            foreach (var item in userFromRepo.CarReceipts)
+            {
+                var mappedItem = _mapper.Map<CarReceiptForReturnDto>(item);
+                list.Add(mappedItem);
+            }
+
+            return Ok(list);
         }
     }
 }

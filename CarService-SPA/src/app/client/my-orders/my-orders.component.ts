@@ -26,7 +26,7 @@ export class MyOrdersComponent implements OnInit {
     const decodedToken = this.authService.decodedToken;
     if (decodedToken) {
       this.productorderService.getOrdersByUser(decodedToken.nameid).subscribe((myOrders: ProductOrder[]) => {
-        this.myOrders = myOrders;
+        this.myOrders = myOrders.sort((a, b) => new Date(b.orderPlacedTime).getTime() - new Date(a.orderPlacedTime).getTime());
       }, error => {
         this.alertify.error(error);
       });

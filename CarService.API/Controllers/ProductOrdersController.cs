@@ -71,10 +71,10 @@ namespace CarService.API.Controllers
         [HttpGet("{userId}")]
         public async Task<IActionResult> GetOrderByUser(int userId)
         {
-            // if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-            // {
-            //     return Unauthorized();
-            // }
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            {
+                return Unauthorized();
+            }
             if (userId == 2)
             {
                 return Unauthorized();
@@ -93,6 +93,10 @@ namespace CarService.API.Controllers
         [HttpDelete("{userId}/delete/{orderId}")]
         public async Task<IActionResult> DeleteOrderFromUser(int userId, int orderId)
         {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            {
+                return Unauthorized();
+            }
             if (userId == 2)
             {
                 return Unauthorized();
@@ -116,6 +120,10 @@ namespace CarService.API.Controllers
         [HttpDelete("{userId}/cancel/{orderId}")]
         public async Task<IActionResult> CancelOrderFromUser(int userId, int orderId)
         {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            {
+                return Unauthorized();
+            }
             if (userId == 2)
             {
                 return Unauthorized();
