@@ -5,6 +5,8 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 import { CarReceiptService } from 'src/app/_services/car-receipt.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/_services/auth.service';
+import { User } from 'src/app/_models/User';
+import { UserService } from 'src/app/_services/user.service';
 
 @Component({
   selector: 'app-repair',
@@ -16,12 +18,14 @@ export class RepairComponent implements OnInit {
   services: Service[];
   model: any = {};
   requestServiceForm: FormGroup;
+  user: User;
   constructor(
     private servicesService: ServicesService,
     private carReceiptService: CarReceiptService,
     private authService: AuthService,
     private alertify: AlertifyService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
@@ -38,6 +42,26 @@ export class RepairComponent implements OnInit {
   }
 
   createRequestServiceForm() {
+    if (this.authService.loggedIn()) {
+      this.userService.userGetUser(this.authService.decodedToken.nameid).subscribe((user: User) => {
+        this.user = user;
+      }, error => {
+        this.alertify.error(error);
+      }, () => {
+        this.requestServiceForm.setValue({
+          firstname: this.user.firstName,
+          lastname: this.user.lastName,
+          licensePlateNumber: null,
+          brand: null,
+          carModel: null,
+          email: this.user.email,
+          phoneNumber: null,
+          address: this.user.address,
+          serviceId: null
+        });
+        this.requestServiceForm.markAllAsTouched();
+      });
+    }
     this.requestServiceForm = this.fb.group({
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
@@ -55,7 +79,7 @@ export class RepairComponent implements OnInit {
     if (this.requestServiceForm.valid) {
       this.model = Object.assign({}, this.requestServiceForm.value);
       localStorage.getItem('token') ? this.model.userId = +this.authService.decodedToken.nameid : this.model.userId = 2;
-      console.log(this.model.userId);
+      // console.log(this.model.userId);
       this.carReceiptService.addCarReceipt(this.model).subscribe(next => {
         this.alertify.success('Your request has been sent');
       }, error => {

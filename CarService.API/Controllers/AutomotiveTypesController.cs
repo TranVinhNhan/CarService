@@ -22,7 +22,7 @@ namespace CarService.API.Controllers
             _repo = repo;
 
         }
-
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetAllTypes()
         {
@@ -46,12 +46,12 @@ namespace CarService.API.Controllers
 
             _repo.Add(type);
 
-            if(await _repo.SaveAll())
+            if (await _repo.SaveAll())
             {
-                return CreatedAtRoute("GetType", new {controller = "AutomotiveTypes", id = type.Id}, type);
+                return CreatedAtRoute("GetType", new { controller = "AutomotiveTypes", id = type.Id }, type);
             }
 
-            throw new Exception ($"Adding Product Type {typeForCreationDto.TypeName} failed on save");
+            throw new Exception($"Adding Product Type {typeForCreationDto.TypeName} failed on save");
         }
 
         [HttpDelete("{id}")]
@@ -78,7 +78,7 @@ namespace CarService.API.Controllers
             {
                 return NoContent();
             }
-            throw new Exception ($"Updating Product Type id {id} failed on save");
+            throw new Exception($"Updating Product Type id {id} failed on save");
         }
     }
 }

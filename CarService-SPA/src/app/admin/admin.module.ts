@@ -42,6 +42,7 @@ import { TypeEditorComponent } from './dashboard/automotives/type-editor/type-ed
 import { SupplierEditorComponent } from './dashboard/automotives/supplier-editor/supplier-editor.component';
 import { OrdersComponent } from './dashboard/orders/orders.component';
 import { ProductOrderService } from '../_services/product-order.service';
+import { ReceiptsComponent } from './dashboard/receipts/receipts.component';
 
 
 @NgModule({
@@ -71,6 +72,7 @@ import { ProductOrderService } from '../_services/product-order.service';
     SuppliersComponent,
     SupplierEditorComponent,
     OrdersComponent,
+    ReceiptsComponent,
 
     ModalUserDeleteComponent,
     ModalUserDetailComponent,

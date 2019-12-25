@@ -6,7 +6,9 @@ import { AuthService } from 'src/app/_services/auth.service';
 import { Order } from 'src/app/_models/order';
 import { ShoppingCartItem } from 'src/app/_models/shoppingcartitem';
 import { ProductOrderService } from 'src/app/_services/product-order.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { User } from 'src/app/_models/User';
+import { UserService } from 'src/app/_services/user.service';
 
 @Component({
   selector: 'app-checkout',
@@ -19,13 +21,15 @@ export class CheckoutComponent implements OnInit {
   total: number;
   cartItemCount: number;
   checkoutForm: FormGroup;
+  user: User;
   constructor(
     private alertify: AlertifyService,
     private productorderService: ProductOrderService,
     private shoppingcartService: ShoppingCartService,
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private userService: UserService
   ) { }
 
   ngOnInit() {
@@ -51,12 +55,29 @@ export class CheckoutComponent implements OnInit {
   }
 
   createcheckoutForm() {
+    if (this.authService.loggedIn()) {
+      this.userService.userGetUser(this.authService.decodedToken.nameid).subscribe((user: User) => {
+        this.user = user;
+      }, error => {
+        this.alertify.error(error);
+      }, () => {
+        this.checkoutForm.setValue({
+          firstname: this.user.firstName,
+          lastname: this.user.lastName,
+          email: this.user.email,
+          phoneNumber: '',
+          address: this.user.address,
+          addressOptional: null
+        });
+        this.checkoutForm.markAllAsTouched();
+      });
+    }
     this.checkoutForm = this.fb.group({
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      firstname: [this.user ? this.user.firstName : '', Validators.required],
+      lastname: [this.user ? this.user.lastName : '', Validators.required],
+      email: [this.user ? this.user.email : '', [Validators.required, Validators.email]],
       phoneNumber: ['', Validators.required],
-      address: ['', Validators.required],
+      address: [this.user ? this.user.address : '', Validators.required],
       addressOptional: ['']
     });
   }
@@ -76,10 +97,10 @@ export class CheckoutComponent implements OnInit {
         this.alertify.success('Checkout completed');
         localStorage.removeItem('cart');
         this.shoppingcartService.changeItemCount(0);
-        if (localStorage.getItem('token') == null) {
-          this.router.navigate(['/']);
+        if (this.authService.loggedIn()) {
+          this.router.navigate(['/purchases']);
         } else {
-          this.router.navigate(['/myorders']);
+          this.router.navigate(['/']);
         }
       }, error => {
         this.alertify.error('error');

@@ -24,6 +24,7 @@ import { CarouselModule, TabsModule } from 'ngx-bootstrap';
 import { CarReceiptService } from '../_services/car-receipt.service';
 import { MyServicesComponent } from './my-services/my-services.component';
 import { MyPurchasesComponent } from './my-purchases/my-purchases.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   imports: [
@@ -49,6 +50,7 @@ import { MyPurchasesComponent } from './my-purchases/my-purchases.component';
     MyPurchasesComponent,
     RepairComponent,
     ListServiceComponent,
+    ProfileComponent,
     FilterPipe
   ],
   providers: [

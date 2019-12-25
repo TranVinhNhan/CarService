@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using CarService.API.Dtos;
@@ -36,6 +37,26 @@ namespace CarService.API.Controllers
         {
             var user = await _repo.GetUser(id);
             var userToReturn = _mapper.Map<UserForDetailDto>(user);
+
+            return Ok(userToReturn);
+        }
+
+        [AllowAnonymous]
+        [HttpGet("own/{userId}")]
+        public async Task<IActionResult> UserGetUser(int userId)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            {
+                return Unauthorized();
+            }
+
+            if (userId == 2)
+            {
+                return Unauthorized();
+            }
+
+            var user = await _repo.GetUser(userId);
+            var userToReturn = _mapper.Map<UserForInfoDto>(user);
 
             return Ok(userToReturn);
         }

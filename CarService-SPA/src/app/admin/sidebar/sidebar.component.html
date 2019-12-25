@@ -8,10 +8,9 @@
     <div class="menu-sidebar__content js-scrollbar1">
         <nav class="navbar-sidebar">
             <ul class="list-unstyled navbar__list">
-                <li routerLinkActive="active">
+                <li routerLinkActive="">
                     <a [routerLink]="['/admin']">
-                        <i class="fas fa-tachometer-alt"></i>Dashboard
-                    </a>
+                        <i class="fas fa-tachometer-alt"></i>Dashboard</a>
                 </li>
                 <li routerLinkActive="active">
                     <a [routerLink]="['/admin/users']">
@@ -29,8 +28,8 @@
                     <a [routerLink]="['/admin/orders']">
                         <i class="fas fa-shopping-cart"></i>Orders</a>
                 </li>
-                <li>
-                    <a href="map.html">
+                <li routerLinkActive="active">
+                    <a [routerLink]="['/admin/receipts']">
                         <i class="fas fa-list-alt"></i>Car Receipts</a>
                 </li>
                 <li>

@@ -34,21 +34,20 @@ export class MyServicesComponent implements OnInit {
         this.services = services;
       }, error => {
         this.alertify.error(error);
-      });
-
-      this.carReceiptService.getCarReceiptsByUser(decodedToken.nameid)
-        .subscribe((carReceipts: CarReceiptDetail[]) => {
-          this.carReceipts = carReceipts.sort((a, b) => new Date(b.dayReceived).getTime() - new Date(a.dayReceived).getTime());
-        }, error => {
-          this.alertify.error(error);
-        }, () => {
-          this.carReceipts.forEach(item => {
-            item.serviceName = this.services.filter(x => x.id === item.serviceId)[0].name;
+      }, () => {
+        this.carReceiptService.getCarReceiptsByUser(decodedToken.nameid)
+          .subscribe((carReceipts: CarReceiptDetail[]) => {
+            this.carReceipts = carReceipts.sort((a, b) => new Date(b.dayReceived).getTime() - new Date(a.dayReceived).getTime());
+          }, error => {
+            this.alertify.error(error);
+          }, () => {
+            this.carReceipts.forEach(item => {
+              item.serviceName = this.services.filter(x => x.id === item.serviceId)[0].name;
+            });
           });
-        });
+      });
     } else {
       this.alertify.error('Error');
     }
-
   }
 }

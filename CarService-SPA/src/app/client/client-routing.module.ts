@@ -13,6 +13,7 @@ import { RepairComponent } from './repair/repair.component';
 import { ListServiceComponent } from './list-service/list-service.component';
 import { MyServicesComponent } from './my-services/my-services.component';
 import { MyPurchasesComponent } from './my-purchases/my-purchases.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 const routes: Routes = [
@@ -28,7 +29,8 @@ const routes: Routes = [
             {path: 'checkout', component: CheckoutComponent},
             {path: 'purchases', component: MyPurchasesComponent},
             {path: 'services', component: ListServiceComponent},
-            {path: 'request', component: RepairComponent}
+            {path: 'request', component: RepairComponent},
+            {path: 'profile', component: ProfileComponent}
         ]
     }
 ];
