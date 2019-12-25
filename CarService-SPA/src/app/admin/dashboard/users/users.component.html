@@ -54,9 +54,9 @@
                                             </td>
                                             <td>
                                                 <div class="table-data__info">
-                                                    <h6>{{user.firstName}} {{user.lastName}}</h6>
+                                                    <h4>{{user.firstName}} {{user.lastName}}</h4>
                                                     <span>
-                                                        <a href>{{user.email}}</a>
+                                                        <p style="font-size: medium;">{{user.email}}</p>
                                                     </span>
                                                 </div>
                                             </td>
@@ -85,7 +85,7 @@
                                                 </span>
                                             </td>
                                             <td *ngIf="user.role ==='Anonymous'">
-                                                <p>Cannot take action</p>
+                                                <p style="font-size: medium;">Cannot take action</p>
                                             </td>
                                         </tr>
                                     </tbody>
